@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Which Muppet Character Are You?</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="quiz-container">
+            <h1>Which Muppet Character Are You?</h1>
+            
+            <form id="quiz-form">
+                <div class="question">
+                    <h3>1. What's your personality like?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="q1a" name="q1" value="kermit" required>
+                            <label for="q1a">Calm and level-headed leader</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q1b" name="q1" value="miss-piggy">
+                            <label for="q1b">Confident and fabulous</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q1c" name="q1" value="fozzie">
+                            <label for="q1c">Funny and always trying to make people laugh</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q1d" name="q1" value="gonzo">
+                            <label for="q1d">Unique and daring</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>2. How do you handle stress?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="q2a" name="q2" value="kermit" required>
+                            <label for="q2a">Stay calm and work through it methodically</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q2b" name="q2" value="miss-piggy">
+                            <label for="q2b">Express yourself dramatically</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q2c" name="q2" value="fozzie">
+                            <label for="q2c">Try to lighten the mood with humor</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q2d" name="q2" value="gonzo">
+                            <label for="q2d">Take risks and try something completely different</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>3. What's your dream job?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="q3a" name="q3" value="kermit" required>
+                            <label for="q3a">Director or manager</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q3b" name="q3" value="miss-piggy">
+                            <label for="q3b">Famous actress or celebrity</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q3c" name="q3" value="fozzie">
+                            <label for="q3c">Comedian or entertainer</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q3d" name="q3" value="gonzo">
+                            <label for="q3d">Stunt performer or daredevil</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>4. What's your approach to relationships?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="q4a" name="q4" value="kermit" required>
+                            <label for="q4a">Supportive and patient</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q4b" name="q4" value="miss-piggy">
+                            <label for="q4b">Passionate and devoted</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q4c" name="q4" value="fozzie">
+                            <label for="q4c">Loyal and always there for friends</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q4d" name="q4" value="gonzo">
+                            <label for="q4d">Adventurous and unconventional</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>5. What describes you best?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="q5a" name="q5" value="kermit" required>
+                            <label for="q5a">Responsible and reliable</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q5b" name="q5" value="miss-piggy">
+                            <label for="q5b">Glamorous and self-assured</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q5c" name="q5" value="fozzie">
+                            <label for="q5c">Good-natured and optimistic</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q5d" name="q5" value="gonzo">
+                            <label for="q5d">Creative and fearless</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button">Find Out My Character!</button>
+            </form>
+
+            <div id="result" class="result">
+                <h2>You are...</h2>
+                <div class="result-character" id="character-name"></div>
+                <p id="character-description"></p>
+                <a href="index.html" class="back-button">Back to Home</a>
+                <a href="muppets.html" class="quiz-button" style="margin-left: 10px;">Take Again</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const characters = {
+            'kermit': {
+                name: 'Kermit the Frog',
+                emoji: '🐸',
+                description: 'You are Kermit the Frog! You\'re a natural leader who stays calm under pressure and always tries to do the right thing. You\'re patient, kind, and have a talent for bringing people together. While others may be chaotic around you, you keep everything running smoothly!'
+            },
+            'miss-piggy': {
+                name: 'Miss Piggy',
+                emoji: '💅',
+                description: 'You are Miss Piggy! You\'re confident, glamorous, and know your worth. You have a strong personality and aren\'t afraid to go after what you want. You bring drama and excitement to everything you do, and you always do it with style and flair!'
+            },
+            'fozzie': {
+                name: 'Fozzie Bear',
+                emoji: '🐻',
+                description: 'You are Fozzie Bear! You\'re good-natured, optimistic, and always trying to make others laugh. Even when your jokes don\'t land, you keep trying with unwavering enthusiasm. You\'re a loyal friend who brings joy and laughter wherever you go. Wocka wocka!'
+            },
+            'gonzo': {
+                name: 'Gonzo',
+                emoji: '🎪',
+                description: 'You are Gonzo! You\'re a true original who isn\'t afraid to be different. You love taking risks and trying things no one else would dare to attempt. Your creativity and fearlessness inspire others, and you prove that being unique is something to celebrate!'
+            }
+        };
+
+        document.getElementById('quiz-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const answers = {
+                'kermit': 0,
+                'miss-piggy': 0,
+                'fozzie': 0,
+                'gonzo': 0
+            };
+            
+            // Count votes for each character
+            for (let i = 1; i <= 5; i++) {
+                const answer = document.querySelector(`input[name="q${i}"]:checked`);
+                if (answer) {
+                    answers[answer.value]++;
+                }
+            }
+            
+            // Find character with most votes
+            let maxVotes = 0;
+            let resultCharacter = 'kermit';
+            for (const [character, votes] of Object.entries(answers)) {
+                if (votes > maxVotes) {
+                    maxVotes = votes;
+                    resultCharacter = character;
+                }
+            }
+            
+            // Display result
+            const result = characters[resultCharacter];
+            document.getElementById('character-name').textContent = result.emoji + ' ' + result.name;
+            document.getElementById('character-description').textContent = result.description;
+            
+            // Hide form and show result
+            document.getElementById('quiz-form').style.display = 'none';
+            document.getElementById('result').classList.add('show');
+        });
+    </script>
+</body>
+</html>

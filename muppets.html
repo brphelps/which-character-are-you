@@ -10,115 +10,342 @@
     <div class="container">
         <div class="quiz-container">
             <h1>Which Muppet Character Are You?</h1>
+            <p style="text-align: center; color: #666; margin-bottom: 30px;">Answer 30 questions to discover which Muppet character matches your personality!</p>
             
             <form id="quiz-form">
+                <!-- Event Drive (ED) Questions -->
                 <div class="question">
-                    <h3>1. What's your personality like?</h3>
+                    <h3>1. I usually initiate action rather than wait for others to decide what happens.</h3>
                     <div class="options">
-                        <div class="option">
-                            <input type="radio" id="q1a" name="q1" value="kermit" required>
-                            <label for="q1a">Calm and level-headed leader</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q1b" name="q1" value="miss-piggy">
-                            <label for="q1b">Confident and fabulous</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q1c" name="q1" value="fozzie">
-                            <label for="q1c">Funny and always trying to make people laugh</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q1d" name="q1" value="gonzo">
-                            <label for="q1d">Unique and daring</label>
-                        </div>
+                        <div class="option"><input type="radio" name="q1" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q1" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q1" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q1" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q1" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
-                    <h3>2. How do you handle stress?</h3>
+                    <h3>2. When a plan is unclear, I step in to define next steps.</h3>
                     <div class="options">
-                        <div class="option">
-                            <input type="radio" id="q2a" name="q2" value="kermit" required>
-                            <label for="q2a">Stay calm and work through it methodically</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q2b" name="q2" value="miss-piggy">
-                            <label for="q2b">Express yourself dramatically</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q2c" name="q2" value="fozzie">
-                            <label for="q2c">Try to lighten the mood with humor</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q2d" name="q2" value="gonzo">
-                            <label for="q2d">Take risks and try something completely different</label>
-                        </div>
+                        <div class="option"><input type="radio" name="q2" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q2" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q2" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q2" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q2" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
-                    <h3>3. What's your dream job?</h3>
+                    <h3>3. I am comfortable steering group outcomes, even if others resist.</h3>
                     <div class="options">
-                        <div class="option">
-                            <input type="radio" id="q3a" name="q3" value="kermit" required>
-                            <label for="q3a">Director or manager</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q3b" name="q3" value="miss-piggy">
-                            <label for="q3b">Famous actress or celebrity</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q3c" name="q3" value="fozzie">
-                            <label for="q3c">Comedian or entertainer</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q3d" name="q3" value="gonzo">
-                            <label for="q3d">Stunt performer or daredevil</label>
-                        </div>
+                        <div class="option"><input type="radio" name="q3" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q3" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q3" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q3" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q3" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
-                    <h3>4. What's your approach to relationships?</h3>
+                    <h3>4. If nothing is happening, I feel compelled to make something happen.</h3>
                     <div class="options">
-                        <div class="option">
-                            <input type="radio" id="q4a" name="q4" value="kermit" required>
-                            <label for="q4a">Supportive and patient</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q4b" name="q4" value="miss-piggy">
-                            <label for="q4b">Passionate and devoted</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q4c" name="q4" value="fozzie">
-                            <label for="q4c">Loyal and always there for friends</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q4d" name="q4" value="gonzo">
-                            <label for="q4d">Adventurous and unconventional</label>
-                        </div>
+                        <div class="option"><input type="radio" name="q4" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q4" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q4" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q4" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q4" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
-                    <h3>5. What describes you best?</h3>
+                    <h3>5. I prefer being responsible for outcomes rather than reacting to them.</h3>
                     <div class="options">
-                        <div class="option">
-                            <input type="radio" id="q5a" name="q5" value="kermit" required>
-                            <label for="q5a">Responsible and reliable</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q5b" name="q5" value="miss-piggy">
-                            <label for="q5b">Glamorous and self-assured</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q5c" name="q5" value="fozzie">
-                            <label for="q5c">Good-natured and optimistic</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q5d" name="q5" value="gonzo">
-                            <label for="q5d">Creative and fearless</label>
-                        </div>
+                        <div class="option"><input type="radio" name="q5" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q5" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q5" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q5" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q5" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <!-- Emotional Containment (EC) Questions -->
+                <div class="question">
+                    <h3>6. My emotional reactions are noticeable and hard to hide.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q6" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q6" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q6" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q6" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q6" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>7. I can stay composed even when things go wrong.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q7" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q7" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q7" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q7" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q7" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>8. Strong emotions tend to override my better judgment.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q8" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q8" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q8" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q8" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q8" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>9. Others often rely on me to remain calm in chaotic situations.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q9" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q9" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q9" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q9" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q9" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>10. I act on impulse before thinking things through.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q10" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q10" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q10" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q10" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q10" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <!-- Social Aim (SA) Questions -->
+                <div class="question">
+                    <h3>11. I prioritize group wellbeing over my personal preferences.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q11" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q11" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q11" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q11" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q11" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>12. Helping others succeed is more important to me than being recognized.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q12" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q12" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q12" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q12" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q12" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>13. I enjoy cooperation even when it slows me down.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q13" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q13" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q13" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q13" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q13" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>14. I'm comfortable acting against group norms if it suits me.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q14" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q14" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q14" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q14" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q14" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>15. I feel responsible for the emotional state of those around me.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q15" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q15" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q15" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q15" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q15" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <!-- Reality Lens (RL) Questions -->
+                <div class="question">
+                    <h3>16. I prefer clear rules and concrete explanations over playful ambiguity.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q16" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q16" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q16" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q16" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q16" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>17. I enjoy nonsense, exaggeration, or illogical humor.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q17" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q17" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q17" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q17" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q17" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>18. I often interpret situations in a literal, straightforward way.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q18" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q18" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q18" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q18" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q18" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>19. Absurdity feels like a valid way to explore truth.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q19" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q19" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q19" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q19" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q19" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>20. I am comfortable when logic bends or contradicts itself.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q20" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q20" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q20" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q20" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q20" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <!-- Show-Awareness (SH) Questions -->
+                <div class="question">
+                    <h3>21. I am aware of how I appear to an audience, even in serious moments.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q21" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q21" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q21" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q21" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q21" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>22. I sometimes exaggerate my behavior for effect.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q22" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q22" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q22" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q22" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q22" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>23. I act as though I'm "in the scene," not observing it from outside.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q23" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q23" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q23" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q23" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q23" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>24. I knowingly play a role that others expect from me.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q24" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q24" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q24" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q24" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q24" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>25. I'm comfortable breaking immersion for a joke or commentary.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q25" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q25" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q25" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q25" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q25" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <!-- Behavioral Stability (BS) Questions -->
+                <div class="question">
+                    <h3>26. My personality stays consistent across different situations.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q26" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q26" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q26" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q26" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q26" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>27. People generally know what to expect from me.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q27" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q27" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q27" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q27" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q27" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>28. My reactions change dramatically depending on my mood.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q28" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q28" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q28" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q28" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q28" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>29. Stress causes me to behave very differently than usual.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q29" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q29" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q29" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q29" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q29" value="10"><label>Always</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>30. I maintain the same values and behavior even under pressure.</h3>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q30" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q30" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q30" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q30" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q30" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
@@ -136,59 +363,185 @@
     </div>
 
     <script>
+        // Character baselines: ED / EC / SA / RL / SH / BS
         const characters = {
             'kermit': {
                 name: 'Kermit the Frog',
                 emoji: '🐸',
+                scores: [9, 8, 9, 3, 6, 8],
                 description: 'You are Kermit the Frog! You\'re a natural leader who stays calm under pressure and always tries to do the right thing. You\'re patient, kind, and have a talent for bringing people together. While others may be chaotic around you, you keep everything running smoothly!'
             },
             'miss-piggy': {
                 name: 'Miss Piggy',
                 emoji: '💅',
+                scores: [9, 2, 5, 4, 7, 4],
                 description: 'You are Miss Piggy! You\'re confident, glamorous, and know your worth. You have a strong personality and aren\'t afraid to go after what you want. You bring drama and excitement to everything you do, and you always do it with style and flair!'
             },
             'fozzie': {
                 name: 'Fozzie Bear',
                 emoji: '🐻',
+                scores: [7, 3, 8, 5, 6, 4],
                 description: 'You are Fozzie Bear! You\'re good-natured, optimistic, and always trying to make others laugh. Even when your jokes don\'t land, you keep trying with unwavering enthusiasm. You\'re a loyal friend who brings joy and laughter wherever you go. Wocka wocka!'
             },
             'gonzo': {
                 name: 'Gonzo',
                 emoji: '🎪',
+                scores: [8, 4, 6, 9, 7, 5],
                 description: 'You are Gonzo! You\'re a true original who isn\'t afraid to be different. You love taking risks and trying things no one else would dare to attempt. Your creativity and fearlessness inspire others, and you prove that being unique is something to celebrate!'
+            },
+            'animal': {
+                name: 'Animal',
+                emoji: '🥁',
+                scores: [7, 1, 4, 6, 5, 2],
+                description: 'You are Animal! You\'re wild, energetic, and live life with unbridled passion. You don\'t hold back your feelings and embrace chaos and excitement. Your raw enthusiasm is contagious, even if you sometimes need someone to keep you in check!'
+            },
+            'rowlf': {
+                name: 'Rowlf the Dog',
+                emoji: '🎹',
+                scores: [6, 8, 8, 3, 5, 8],
+                description: 'You are Rowlf the Dog! You\'re laid-back, wise, and down-to-earth. You have a calm, steady presence that makes others feel comfortable. You\'re talented but humble, and you know that the best things in life are simple pleasures like music and friendship.'
+            },
+            'scooter': {
+                name: 'Scooter',
+                emoji: '📋',
+                scores: [8, 9, 8, 2, 4, 9],
+                description: 'You are Scooter! You\'re organized, reliable, and always on top of things. You keep everything running behind the scenes and take pride in making sure everyone has what they need. You\'re the ultimate team player and problem-solver!'
+            },
+            'statler-waldorf': {
+                name: 'Statler & Waldorf',
+                emoji: '👴',
+                scores: [6, 7, 3, 4, 8, 7],
+                description: 'You are Statler and Waldorf! You\'re witty, sarcastic, and not afraid to speak your mind. You see through pretense and aren\'t impressed by much. Your sharp commentary and humor come from years of experience and a healthy dose of skepticism!'
+            },
+            'swedish-chef': {
+                name: 'Swedish Chef',
+                emoji: '👨‍🍳',
+                scores: [6, 3, 5, 8, 7, 4],
+                description: 'You are the Swedish Chef! You\'re creative, enthusiastic, and march to the beat of your own drum. Your unique approach to life may seem chaotic to others, but it makes perfect sense to you. You bring joy and unpredictability wherever you go!'
+            },
+            'beaker': {
+                name: 'Beaker',
+                emoji: '🧪',
+                scores: [4, 2, 7, 4, 4, 3],
+                description: 'You are Beaker! You\'re nervous, cautious, and often find yourself in overwhelming situations. Despite your anxiety, you\'re loyal and keep trying even when things go wrong. Your expressive reactions and vulnerability make you endearing to everyone!'
+            },
+            'sam-eagle': {
+                name: 'Sam the Eagle',
+                emoji: '🦅',
+                scores: [8, 9, 4, 2, 5, 9],
+                description: 'You are Sam the Eagle! You\'re dignified, principled, and have high standards. You believe in tradition, order, and doing things the proper way. While others may be frivolous, you maintain your composure and integrity at all times!'
+            },
+            'rizzo': {
+                name: 'Rizzo the Rat',
+                emoji: '🐀',
+                scores: [7, 4, 5, 5, 7, 5],
+                description: 'You are Rizzo the Rat! You\'re street-smart, witty, and always looking out for number one. You have a quick comeback for everything and aren\'t afraid to speak your mind. You\'re savvy and know how to work any situation to your advantage!'
+            },
+            'pepe': {
+                name: 'Pepe the King Prawn',
+                emoji: '🦐',
+                scores: [8, 3, 4, 6, 7, 4],
+                description: 'You are Pepe the King Prawn! You\'re confident, charming, and always ready for the spotlight. You have a flair for the dramatic and believe you deserve the best. Your self-assured personality and humor make you unforgettable, okay?'
+            },
+            'bunsen': {
+                name: 'Dr. Bunsen Honeydew',
+                emoji: '🔬',
+                scores: [7, 9, 6, 3, 4, 8],
+                description: 'You are Dr. Bunsen Honeydew! You\'re intelligent, logical, and fascinated by how things work. You approach problems scientifically and love experimenting with new ideas. Sometimes you get so caught up in your work that you don\'t notice the chaos around you!'
+            },
+            'walter': {
+                name: 'Walter',
+                emoji: '🎬',
+                scores: [6, 7, 9, 3, 4, 8],
+                description: 'You are Walter! You\'re sincere, enthusiastic, and believe in the power of friendship and following your dreams. You\'re a true fan who appreciates the good in everything and everyone. Your genuine heart and optimism inspire those around you!'
             }
         };
+
+        // Reverse-scored questions (need to flip the score)
+        const reverseScored = [6, 8, 10, 14, 16, 18, 23, 28, 29];
 
         document.getElementById('quiz-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const answers = {
-                'kermit': 0,
-                'miss-piggy': 0,
-                'fozzie': 0,
-                'gonzo': 0
-            };
+            // Calculate dimension scores
+            const userScores = [0, 0, 0, 0, 0, 0]; // ED, EC, SA, RL, SH, BS
             
-            // Count votes for each character
+            // ED: Q1-5
             for (let i = 1; i <= 5; i++) {
-                const answer = document.querySelector(`input[name="q${i}"]:checked`);
-                if (answer) {
-                    answers[answer.value]++;
-                }
+                const value = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+                userScores[0] += value;
             }
+            userScores[0] = userScores[0] / 5;
             
-            // Find character with most votes
-            let maxVotes = 0;
-            let resultCharacter = 'kermit';
-            for (const [character, votes] of Object.entries(answers)) {
-                if (votes > maxVotes) {
-                    maxVotes = votes;
-                    resultCharacter = character;
+            // EC: Q6-10 (Q6, Q8, Q10 are reverse-scored)
+            for (let i = 6; i <= 10; i++) {
+                let value = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+                if (reverseScored.includes(i)) {
+                    value = 11 - value; // Reverse score: 1->10, 3->8, 5->6, 7->4, 10->1
+                }
+                userScores[1] += value;
+            }
+            userScores[1] = userScores[1] / 5;
+            
+            // SA: Q11-15 (Q14 is reverse-scored)
+            for (let i = 11; i <= 15; i++) {
+                let value = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+                if (reverseScored.includes(i)) {
+                    value = 11 - value;
+                }
+                userScores[2] += value;
+            }
+            userScores[2] = userScores[2] / 5;
+            
+            // RL: Q16-20 (Q16, Q18 are reverse-scored)
+            for (let i = 16; i <= 20; i++) {
+                let value = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+                if (reverseScored.includes(i)) {
+                    value = 11 - value;
+                }
+                userScores[3] += value;
+            }
+            userScores[3] = userScores[3] / 5;
+            
+            // SH: Q21-25 (Q23 is reverse-scored)
+            for (let i = 21; i <= 25; i++) {
+                let value = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+                if (reverseScored.includes(i)) {
+                    value = 11 - value;
+                }
+                userScores[4] += value;
+            }
+            userScores[4] = userScores[4] / 5;
+            
+            // BS: Q26-30 (Q28, Q29 are reverse-scored)
+            for (let i = 26; i <= 30; i++) {
+                let value = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+                if (reverseScored.includes(i)) {
+                    value = 11 - value;
+                }
+                userScores[5] += value;
+            }
+            userScores[5] = userScores[5] / 5;
+            
+            // Find best matching character using Euclidean distance
+            let minDistance = Infinity;
+            let bestMatch = 'kermit';
+            
+            for (const [charKey, charData] of Object.entries(characters)) {
+                let distance = 0;
+                for (let i = 0; i < 6; i++) {
+                    distance += Math.pow(userScores[i] - charData.scores[i], 2);
+                }
+                distance = Math.sqrt(distance);
+                
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    bestMatch = charKey;
                 }
             }
             
             // Display result
-            const result = characters[resultCharacter];
+            const result = characters[bestMatch];
             document.getElementById('character-name').textContent = result.emoji + ' ' + result.name;
             document.getElementById('character-description').textContent = result.description;
             

@@ -197,6 +197,16 @@ main {
     margin-bottom: 20px;
 }
 
+.character-image {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    margin: 20px auto;
+    display: block;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
 .back-button {
     display: inline-block;
     background: #f0f0f0;

@@ -127,6 +127,7 @@
 
             <div id="result" class="result">
                 <h2>You are...</h2>
+                <img id="character-image" class="character-image" src="" alt="" />
                 <div class="result-character" id="character-name"></div>
                 <p id="character-description"></p>
                 <a href="index.html" class="back-button">Back to Home</a>
@@ -140,21 +141,25 @@
             'elmo': {
                 name: 'Elmo',
                 emoji: '🔴',
+                image: 'https://upload.wikimedia.org/wikipedia/en/c/c8/Elmo_from_Sesame_Street.gif',
                 description: 'You are Elmo! You\'re cheerful, enthusiastic, and love spreading joy to everyone around you. Your positive energy is contagious, and you have a special way of making people smile. You see the world with wonder and excitement!'
             },
             'cookie': {
                 name: 'Cookie Monster',
                 emoji: '🍪',
+                image: 'https://upload.wikimedia.org/wikipedia/en/5/51/CookieMonster.jpg',
                 description: 'You are Cookie Monster! You have a passionate love for the good things in life and aren\'t afraid to show your enthusiasm. You\'re fun-loving, impulsive, and always bring energy to any situation. C is for Cookie, and that\'s good enough for you!'
             },
             'oscar': {
                 name: 'Oscar the Grouch',
                 emoji: '🗑️',
+                image: 'https://upload.wikimedia.org/wikipedia/en/b/b1/Oscar_the_Grouch.jpg',
                 description: 'You are Oscar the Grouch! You march to the beat of your own drum and aren\'t afraid to be different. While you might seem grumpy on the outside, you have a heart of gold and are loyal to those you care about. You appreciate the value in things others might overlook!'
             },
             'big-bird': {
                 name: 'Big Bird',
                 emoji: '🐦',
+                image: 'https://upload.wikimedia.org/wikipedia/en/f/f3/Big_Bird_in_2019.jpg',
                 description: 'You are Big Bird! You\'re curious, kind-hearted, and always eager to learn new things. You have a gentle nature and treat everyone with kindness. Your inquisitive mind and big heart make you a wonderful friend to all!'
             }
         };
@@ -189,6 +194,8 @@
             
             // Display result
             const result = characters[resultCharacter];
+            document.getElementById('character-image').src = result.image;
+            document.getElementById('character-image').alt = result.name;
             document.getElementById('character-name').textContent = result.emoji + ' ' + result.name;
             document.getElementById('character-description').textContent = result.description;
             

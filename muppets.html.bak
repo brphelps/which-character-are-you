@@ -17,55 +17,55 @@
                 <div class="question">
                     <h3>1. I usually initiate action rather than wait for others to decide what happens.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q1" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q1" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q1" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q1" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q1" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q1" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q1" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q1" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q1" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q1" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>2. When a plan is unclear, I step in to define next steps.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q2" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q2" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q2" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q2" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q2" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q2" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q2" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q2" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q2" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q2" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>3. I am comfortable steering group outcomes, even if others resist.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q3" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q3" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q3" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q3" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q3" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q3" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q3" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q3" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q3" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q3" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>4. If nothing is happening, I feel compelled to make something happen.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q4" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q4" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q4" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q4" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q4" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q4" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q4" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q4" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q4" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q4" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>5. I prefer being responsible for outcomes rather than reacting to them.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q5" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q5" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q5" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q5" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q5" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q5" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q5" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q5" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q5" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q5" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
@@ -73,55 +73,55 @@
                 <div class="question">
                     <h3>6. My emotional reactions are noticeable and hard to hide.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q6" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q6" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q6" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q6" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q6" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q6" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q6" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q6" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q6" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q6" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>7. I can stay composed even when things go wrong.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q7" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q7" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q7" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q7" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q7" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q7" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q7" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q7" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q7" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q7" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>8. Strong emotions tend to override my better judgment.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q8" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q8" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q8" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q8" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q8" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q8" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q8" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q8" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q8" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q8" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>9. Others often rely on me to remain calm in chaotic situations.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q9" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q9" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q9" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q9" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q9" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q9" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q9" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q9" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q9" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q9" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>10. I act on impulse before thinking things through.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q10" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q10" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q10" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q10" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q10" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q10" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q10" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q10" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q10" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q10" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
@@ -129,55 +129,55 @@
                 <div class="question">
                     <h3>11. I prioritize group wellbeing over my personal preferences.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q11" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q11" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q11" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q11" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q11" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q11" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q11" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q11" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q11" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q11" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>12. Helping others succeed is more important to me than being recognized.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q12" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q12" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q12" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q12" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q12" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q12" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q12" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q12" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q12" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q12" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>13. I enjoy cooperation even when it slows me down.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q13" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q13" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q13" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q13" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q13" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q13" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q13" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q13" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q13" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q13" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>14. I'm comfortable acting against group norms if it suits me.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q14" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q14" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q14" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q14" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q14" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q14" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q14" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q14" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q14" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q14" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>15. I feel responsible for the emotional state of those around me.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q15" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q15" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q15" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q15" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q15" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q15" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q15" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q15" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q15" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q15" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
@@ -185,55 +185,55 @@
                 <div class="question">
                     <h3>16. I prefer clear rules and concrete explanations over playful ambiguity.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q16" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q16" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q16" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q16" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q16" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q16" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q16" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q16" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q16" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q16" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>17. I enjoy nonsense, exaggeration, or illogical humor.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q17" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q17" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q17" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q17" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q17" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q17" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q17" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q17" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q17" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q17" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>18. I often interpret situations in a literal, straightforward way.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q18" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q18" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q18" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q18" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q18" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q18" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q18" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q18" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q18" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q18" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>19. Absurdity feels like a valid way to explore truth.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q19" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q19" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q19" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q19" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q19" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q19" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q19" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q19" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q19" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q19" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>20. I am comfortable when logic bends or contradicts itself.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q20" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q20" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q20" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q20" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q20" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q20" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q20" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q20" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q20" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q20" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
@@ -241,55 +241,55 @@
                 <div class="question">
                     <h3>21. I am aware of how I appear to an audience, even in serious moments.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q21" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q21" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q21" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q21" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q21" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q21" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q21" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q21" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q21" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q21" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>22. I sometimes exaggerate my behavior for effect.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q22" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q22" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q22" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q22" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q22" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q22" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q22" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q22" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q22" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q22" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>23. I act as though I'm "in the scene," not observing it from outside.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q23" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q23" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q23" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q23" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q23" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q23" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q23" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q23" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q23" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q23" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>24. I knowingly play a role that others expect from me.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q24" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q24" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q24" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q24" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q24" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q24" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q24" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q24" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q24" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q24" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>25. I'm comfortable breaking immersion for a joke or commentary.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q25" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q25" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q25" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q25" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q25" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q25" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q25" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q25" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q25" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q25" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
@@ -297,55 +297,55 @@
                 <div class="question">
                     <h3>26. My personality stays consistent across different situations.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q26" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q26" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q26" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q26" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q26" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q26" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q26" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q26" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q26" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q26" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>27. People generally know what to expect from me.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q27" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q27" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q27" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q27" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q27" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q27" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q27" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q27" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q27" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q27" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>28. My reactions change dramatically depending on my mood.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q28" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q28" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q28" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q28" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q28" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q28" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q28" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q28" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q28" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q28" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>29. Stress causes me to behave very differently than usual.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q29" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q29" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q29" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q29" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q29" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q29" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q29" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q29" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q29" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q29" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>30. I maintain the same values and behavior even under pressure.</h3>
                     <div class="options">
-                        <label class="option"><input type="radio" name="q30" value="1" required>Never</label>
-                        <label class="option"><input type="radio" name="q30" value="3">Sometimes</label>
-                        <label class="option"><input type="radio" name="q30" value="5">Half the time</label>
-                        <label class="option"><input type="radio" name="q30" value="7">Frequently</label>
-                        <label class="option"><input type="radio" name="q30" value="10">Always</label>
+                        <div class="option"><input type="radio" name="q30" value="1" required><label>Never</label></div>
+                        <div class="option"><input type="radio" name="q30" value="3"><label>Sometimes</label></div>
+                        <div class="option"><input type="radio" name="q30" value="5"><label>Half the time</label></div>
+                        <div class="option"><input type="radio" name="q30" value="7"><label>Frequently</label></div>
+                        <div class="option"><input type="radio" name="q30" value="10"><label>Always</label></div>
                     </div>
                 </div>
 
@@ -566,51 +566,6 @@
             // Hide form and show result
             document.getElementById('quiz-form').style.display = 'none';
             document.getElementById('result').classList.add('show');
-        });
-
-        // Add keyboard support for quick answering
-        let currentQuestion = 1;
-        const totalQuestions = 30;
-        
-        document.addEventListener('keydown', function(e) {
-            // Only handle keys 1-5 when the quiz form is visible
-            if (document.getElementById('quiz-form').style.display === 'none') {
-                return;
-            }
-            
-            // Map keys 1-5 to values 1, 3, 5, 7, 10
-            const keyToValue = {
-                '1': '1',
-                '2': '3',
-                '3': '5',
-                '4': '7',
-                '5': '10'
-            };
-            
-            if (keyToValue[e.key]) {
-                e.preventDefault();
-                
-                // Find the current question's radio input with the corresponding value
-                const radio = document.querySelector(`input[name="q${currentQuestion}"][value="${keyToValue[e.key]}"]`);
-                
-                if (radio) {
-                    radio.checked = true;
-                    
-                    // Move to next question if not the last
-                    if (currentQuestion < totalQuestions) {
-                        currentQuestion++;
-                        
-                        // Scroll the next question into view
-                        const nextQuestion = document.querySelector(`input[name="q${currentQuestion}"]`);
-                        if (nextQuestion) {
-                            nextQuestion.closest('.question').scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'center'
-                            });
-                        }
-                    }
-                }
-            }
         });
     </script>
 </body>

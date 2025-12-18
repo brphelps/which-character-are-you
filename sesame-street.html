@@ -172,12 +172,11 @@
                 
                 // Find all radios for current question
                 const radios = document.querySelectorAll(`input[name="${currentQuestionName}"]`);
-                const radioArray = Array.from(radios);
                 
                 // Select based on key (1=first option, 2=second, etc.)
                 const selectedIndex = parseInt(e.key) - 1;
-                if (radioArray[selectedIndex]) {
-                    radioArray[selectedIndex].checked = true;
+                if (radios[selectedIndex]) {
+                    radios[selectedIndex].checked = true;
                     
                     // Move to next question if not the last
                     if (currentQuestion < totalQuestions) {

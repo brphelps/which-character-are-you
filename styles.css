@@ -128,6 +128,7 @@ main {
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
+    width: 100%;
 }
 
 .option:hover {
@@ -140,12 +141,7 @@ main {
     cursor: pointer;
     width: 20px;
     height: 20px;
-}
-
-.option label {
-    cursor: pointer;
-    flex: 1;
-    font-size: 1em;
+    flex-shrink: 0;
 }
 
 .submit-button {

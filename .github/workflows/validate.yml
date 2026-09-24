@@ -1,0 +1,32 @@
+name: Validate static site
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check shell syntax
+        run: bash -n scripts/*.sh
+
+      - name: Validate site
+        run: ./scripts/validate-site.sh
+
+      - name: Smoke test Pages package
+        run: |
+          staging_dir="${RUNNER_TEMP}/pages"
+          ./scripts/build-pages.sh "$staging_dir"
+          test -f "$staging_dir/index.html"
+          test -f "$staging_dir/.nojekyll"
+          test ! -e "$staging_dir/README.md"
+          test ! -e "$staging_dir/.github"
+          test ! -e "$staging_dir/scripts"

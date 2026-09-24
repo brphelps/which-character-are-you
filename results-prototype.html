@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A rich, shareable UHCI character result prototype.">
+    <title>Your Character Match | Results Prototype</title>
+    <link rel="stylesheet" href="styles/results.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to results</a>
+
+    <header class="site-header">
+        <a class="brand" href="index.html">Which Character Are You?</a>
+        <span class="prototype-label">Results prototype</span>
+    </header>
+
+    <main id="main-content" class="results-shell" tabindex="-1">
+        <div class="loading-card" data-loading>
+            <p>Preparing your character result...</p>
+        </div>
+        <div data-results-root></div>
+        <noscript>
+            <section class="notice-card">
+                <h1>JavaScript is required</h1>
+                <p>This prototype needs JavaScript to visualize and share a result.</p>
+            </section>
+        </noscript>
+    </main>
+
+    <script id="result-fixture" type="application/json">
+        {
+            "title": "Your Muppet character profile",
+            "dimensions": {
+                "ED": 7.6,
+                "EC": 7.2,
+                "SA": 8.7,
+                "RL": 5.8,
+                "SH": 4.9,
+                "BS": 8.3
+            },
+            "matches": [
+                {
+                    "id": "kermit",
+                    "name": "Kermit the Frog",
+                    "score": 93,
+                    "image": "images/kermit.svg",
+                    "description": "A steady, caring organizer who keeps the show moving without losing sight of the people in it.",
+                    "dimensions": {
+                        "ED": 8.1,
+                        "EC": 7.6,
+                        "SA": 9.1,
+                        "RL": 5.3,
+                        "SH": 5.5,
+                        "BS": 8.8
+                    }
+                },
+                {
+                    "id": "rowlf",
+                    "name": "Rowlf the Dog",
+                    "score": 87,
+                    "image": "images/rowlf.svg",
+                    "description": "Warm, grounded, and dependable, with an easygoing style that makes other people feel at home.",
+                    "dimensions": {
+                        "ED": 5.4,
+                        "EC": 8.4,
+                        "SA": 8.2,
+                        "RL": 4.8,
+                        "SH": 4.2,
+                        "BS": 9.2
+                    }
+                },
+                {
+                    "id": "scooter",
+                    "name": "Scooter",
+                    "score": 84,
+                    "image": "images/scooter.svg",
+                    "description": "A practical, loyal coordinator who anticipates what the group needs and reliably makes it happen.",
+                    "dimensions": {
+                        "ED": 8.7,
+                        "EC": 8.1,
+                        "SA": 8.5,
+                        "RL": 3.8,
+                        "SH": 4.7,
+                        "BS": 8.9
+                    }
+                },
+                {
+                    "id": "walter",
+                    "name": "Walter",
+                    "score": 78,
+                    "image": "images/walter.svg",
+                    "description": "An earnest, enthusiastic team player whose optimism and loyalty help the whole group shine.",
+                    "dimensions": {
+                        "ED": 6.7,
+                        "EC": 6.4,
+                        "SA": 9.3,
+                        "RL": 4.4,
+                        "SH": 3.6,
+                        "BS": 7.7
+                    }
+                }
+            ]
+        }
+    </script>
+    <script type="module" src="js/results-view.js"></script>
+</body>
+</html>

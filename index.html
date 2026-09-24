@@ -3,34 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Which Character Are You?</title>
+    <meta name="description" content="Discover your Henson character match through the six-dimensional Unified Henson Character Inventory, or take a quick Sesame Street character quiz.">
+    <meta name="theme-color" content="#211a3a">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Which Character Are You?">
+    <meta property="og:title" content="Which Character Are You?">
+    <meta property="og:description" content="Explore the six-dimensional UHCI personality model and discover your Henson character match.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Which Character Are You?">
+    <meta name="twitter:description" content="Explore the six-dimensional UHCI personality model and discover your Henson character match.">
+    <title>Which Character Are You? | UHCI Personality Quizzes</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="home-page">
+    <a class="skip-link" href="#main-content">Skip to quizzes</a>
+
     <div class="container">
-        <header>
-            <h1>Which Character Are You?</h1>
-            <p class="subtitle">Take a quiz to discover which character matches your personality!</p>
+        <header class="hero">
+            <p class="eyebrow">Unified Henson Character Inventory</p>
+            <h1>Meet your character in <span>six dimensions.</span></h1>
+            <p class="hero-copy">
+                Personality is more than a type. The UHCI maps how you act, connect,
+                interpret, perform, and adapt, then finds the character who shares your pattern.
+            </p>
+            <ul class="dimension-preview">
+                <li>Drive</li>
+                <li>Emotion</li>
+                <li>Social aim</li>
+                <li>Reality</li>
+                <li>Show-awareness</li>
+                <li>Stability</li>
+            </ul>
         </header>
-        
-        <main>
-            <div class="quiz-grid">
-                <div class="quiz-card">
-                    <h2>Sesame Street Character</h2>
-                    <p>Find out which beloved Sesame Street character you're most like!</p>
-                    <a href="sesame-street.html" class="quiz-button">Take the Quiz</a>
+
+        <main id="main-content">
+            <section class="quiz-section" aria-labelledby="quiz-heading">
+                <div class="section-heading">
+                    <p class="eyebrow">Choose your quiz</p>
+                    <h2 id="quiz-heading">Two ways to find your match</h2>
+                    <p>Go deep with the full personality model or keep it quick and playful.</p>
                 </div>
-                
-                <div class="quiz-card">
-                    <h2>Muppet Character</h2>
-                    <p>Discover which classic Muppet character matches your personality!</p>
-                    <a href="muppets.html" class="quiz-button">Take the Quiz</a>
+
+                <div class="quiz-grid">
+                    <article class="quiz-card quiz-card--featured">
+                        <div class="card-topline">
+                            <span class="card-kicker">Full UHCI profile</span>
+                            <span class="card-time">30 questions</span>
+                        </div>
+                        <div class="card-mark" aria-hidden="true">M</div>
+                        <h3>Muppet character</h3>
+                        <p id="muppet-description">
+                            Map all six dimensions and match your personality pattern with a
+                            classic Muppet character.
+                        </p>
+                        <a href="muppets.html" class="quiz-button" aria-describedby="muppet-description">
+                            Take the Muppet quiz
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    </article>
+
+                    <article class="quiz-card">
+                        <div class="card-topline">
+                            <span class="card-kicker">Quick character match</span>
+                            <span class="card-time">5 questions</span>
+                        </div>
+                        <div class="card-mark card-mark--sunny" aria-hidden="true">S</div>
+                        <h3>Sesame Street character</h3>
+                        <p id="sesame-description">
+                            Take a shorter, lighthearted quiz to meet the Sesame Street
+                            character most like you.
+                        </p>
+                        <a href="sesame-street.html" class="quiz-button quiz-button--secondary" aria-describedby="sesame-description">
+                            Take the Sesame quiz
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    </article>
                 </div>
-            </div>
+            </section>
+
+            <section class="model-section" aria-labelledby="model-heading">
+                <div class="model-intro">
+                    <p class="eyebrow">The model</p>
+                    <h2 id="model-heading">Not a box. A personality shape.</h2>
+                    <p>
+                        Each UHCI dimension is a spectrum. Together, the six scores create a
+                        more expressive profile than a single label can.
+                    </p>
+                </div>
+
+                <ol class="dimension-list">
+                    <li>
+                        <span class="dimension-number">01</span>
+                        <div>
+                            <h3>Event Drive</h3>
+                            <p>Reactive <span aria-hidden="true">↔</span><span class="visually-hidden">to</span> Agentic</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="dimension-number">02</span>
+                        <div>
+                            <h3>Emotional Containment</h3>
+                            <p>Explosive <span aria-hidden="true">↔</span><span class="visually-hidden">to</span> Regulated</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="dimension-number">03</span>
+                        <div>
+                            <h3>Social Aim</h3>
+                            <p>Self-directed <span aria-hidden="true">↔</span><span class="visually-hidden">to</span> Communal</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="dimension-number">04</span>
+                        <div>
+                            <h3>Reality Lens</h3>
+                            <p>Concrete <span aria-hidden="true">↔</span><span class="visually-hidden">to</span> Surreal</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="dimension-number">05</span>
+                        <div>
+                            <h3>Show-Awareness</h3>
+                            <p>Immersed <span aria-hidden="true">↔</span><span class="visually-hidden">to</span> Performative</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="dimension-number">06</span>
+                        <div>
+                            <h3>Behavioral Stability</h3>
+                            <p>Volatile <span aria-hidden="true">↔</span><span class="visually-hidden">to</span> Steady</p>
+                        </div>
+                    </li>
+                </ol>
+            </section>
         </main>
-        
+
         <footer>
-            <p>&copy; 2025 Which Character Are You</p>
+            <p>Made for curious minds and character fans.</p>
         </footer>
     </div>
 </body>

@@ -1,141 +1,133 @@
 # Which Character Are You?
 
-A small, dependency-free static website with quizzes that match answers to
-Sesame Street and Muppet characters. The repository is intentionally simple:
-open the site in a browser, answer the questions, and receive the character
-with the highest score.
+A static, browser-only character quiz for playful self-reflection, not a
+psychological assessment. Choose a quick Muppet preview, a fuller Muppet
+profile, or a five-question Sesame Street quiz. No account is required.
 
-## Current architecture
+## Product journeys
 
-The production site is plain HTML, CSS, and inline JavaScript:
-
-- `index.html` links to the available quizzes.
-- `sesame-street.html` and `muppets.html` contain their questions, character
-  metadata, scoring logic, and result rendering.
-- `styles.css` supplies the shared presentation.
-- `images/` contains the locally hosted character portraits used by quiz results.
-- `credits.html` records the source and license for every character image.
-
-There is no package manager, application framework, build-time JavaScript, or
-backend service. Each quiz currently uses direct vote counting: every answer
-adds one vote to a character, and the character with the most votes wins.
-
-## UHCI reference model
-
-The repository also contains the Unified Henson Character Inventory (UHCI), a
-six-dimension, 1-10 reference model for describing character personalities:
-
-| Dimension | Range |
+| Route | Experience |
 | --- | --- |
-| Event Drive (ED) | Reactive to agentic |
-| Emotional Containment (EC) | Explosive to regulated |
-| Social Aim (SA) | Self-directed/oppositional to communal/nurturing |
-| Reality Lens (RL) | Concrete/literal to absurd/surreal |
-| Show-Awareness (SH) | Immersed to meta/performative |
-| Behavioral Stability (BS) | Volatile to steady |
+| `index.html` | Character-first entry point with quick and full quiz choices. |
+| `muppets.html` | Six-question **provisional** preview, one question per UHCI dimension. |
+| `muppets.html?mode=full` | Thirty-question profile; refining a preview preserves its six answers and asks the remaining 24. |
+| `sesame-street.html` | Five-question character-vote quiz with four possible results. |
+| `results.html?character=<id>` | A shared character reveal, without the sender's answers or scores. |
+| `results.html?example=1` | Explicitly labeled example of the richer profile, not a visitor's result. |
+| `credits.html` | Sources, licenses, and attribution for local character portraits. |
 
-`henson-personality-index.md` defines the dimensions, and
-`henson-personality-index-baselines.md` records proposed character baselines.
-These files are design references today; the deployed quizzes do **not** yet
-calculate UHCI profiles.
+The guided quiz supports back navigation, saved progress, and reset. Muppet
+results explain the closest match, nearby matches, and six profile dimensions.
+The production roster remains the original **15 Muppet results and four Sesame
+Street results**, with stable character IDs. Statler and Waldorf are one result;
+the 60-entry reference inventory is not the selectable production cast.
 
-### Planned scoring/data separation
+## Architecture and scoring
 
-A future architecture may move questions, character profiles, and scoring out
-of the HTML pages into independently validated data and JavaScript modules.
-That separation should make it easier to:
+HTML entry points use native JavaScript modules, shared CSS, and local images.
+There is no framework, bundler, runtime package dependency, or application
+backend. `package.json` provides Node's built-in test runner.
 
-- reuse one scoring engine across quizzes;
-- validate question and character data without parsing HTML;
-- compare quiz outcomes with UHCI baselines; and
-- change content without changing rendering code.
+- `js/quiz-controller.js` manages the guided question flow and browser progress.
+- `js/quiz-engine.js` validates responses, computes dimension averages, and
+  ranks Muppet character baselines.
+- Quiz entry modules and `data/` keep content separate from presentation.
+- `js/muppet-profile.js` adapts the existing Muppet roster and questionnaire
+  to the reusable `js/results-view.js` renderer.
+- `js/results-page.js` handles standalone examples and incoming result links;
+  `js/result-sharing.js` supplies sharing and downloadable result cards.
+- `styles.css`, `styles/quiz.css`, and `styles/results.css` cover the site,
+  guided questions, and result visualizations.
 
-Until that work is implemented, contributors should treat the inline quiz
-objects and vote-counting logic as the source of current behavior.
+Muppet scoring uses the six Unified Henson Character Inventory (UHCI)
+dimensions: Event Drive, Emotional Containment, Social Aim, Reality Lens,
+Show-Awareness, and Behavioral Stability. Responses use a 1-10 scale. Flagged
+items are reversed, each item's primary dimension receives its score, and
+dimension averages are compared with eligible character baselines using
+unweighted Euclidean distance. Five visible frequency choices now map to the
+equally spaced values `1, 3.25, 5.5, 7.75, 10`, rather than the earlier
+`1, 3, 5, 7, 10`; reversal is `11 - value`. This deliberate scale change is
+not an accuracy claim. Exact ties sort by ascending character ID.
+Displayed match similarity is `100 * (1 - distance / (9 * sqrt(6)))`, not a
+probability, diagnostic finding, or validated confidence estimate.
 
-## Local preview
+The six-question path has one item per dimension and is intentionally
+provisional. Thirty questions provide more input, not a claim of scientific
+validity. Sesame uses direct character votes, not a fabricated UHCI profile.
+See [scoring calibration](docs/scoring-calibration.md) for reference-model
+limitations and proposed evaluation methods.
 
-The site must be served over HTTP so local behavior matches GitHub Pages:
+## Privacy
+
+Answers and resumable progress stay in browser storage on the current device;
+they are not submitted to a quiz server. Reset clears the corresponding saved
+quiz progress. Browser storage can be unavailable or cleared, so a saved
+session is not a backup or cross-device account.
+
+The default share URL contains only a production character ID. It does not
+contain individual answers, dimension scores, or a completion history.
+Copying or sharing a result is an explicit visitor action. Downloaded cards
+are generated in the browser. Any detailed profile URL a visitor explicitly
+chooses to share exposes its encoded dimensions to recipients; encoding is
+not encryption. Do not put sensitive information in shared URLs.
+
+There are no analytics events, tracking dependencies, account records, or
+application-side completion/fit/share metrics. The static hosting provider
+still receives ordinary page requests; this is not a promise about its
+infrastructure logs.
+
+## Local preview and checks
+
+Use Node.js, Python 3.9 or newer, and Bash. No `npm install` is needed:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000/>. Stop the server with <kbd>Ctrl</kbd>+<kbd>C</kbd>.
-
-No dependency installation is required.
-
-## Repository layout
-
-```text
-.
-├── .github/workflows/               # Validation and GitHub Pages automation
-├── images/                          # Public character portraits
-├── credits.html                     # Image sources, attribution, and licenses
-├── scripts/
-│   ├── build-pages.sh               # Creates the explicit Pages artifact
-│   └── validate-site.sh             # Runs static-site validation
-├── index.html                       # Site landing page
-├── muppets.html                     # Muppet quiz and inline scoring
-├── sesame-street.html               # Sesame Street quiz and inline scoring
-├── styles.css                       # Shared site styles
-├── henson-personality-index.md      # UHCI dimension reference
-├── henson-personality-index-baselines.md
-└── muppet-questions.md              # Question-design reference
-```
-
-The personality and question markdown files are repository documentation, not
-public site assets.
-
-## Validation
-
-Run the same lightweight checks used by CI:
+Open <http://localhost:8000/>. Serve over HTTP rather than opening files
+directly, because browser modules and origin-specific storage require it.
 
 ```bash
+npm test
 ./scripts/validate-site.sh
+./scripts/build-pages.sh /tmp/which-character-pages
 ```
 
-The validator:
+The validator checks HTML references, nested CSS assets, `.js`/`.mjs` syntax,
+literal module imports/re-exports, and catalog image paths. Root-relative
+references fail because they break GitHub Pages project subpaths. Literal
+reference checks do not replace browser tests for generated URLs or DOM logic.
+The packager runs the same checks against the staged artifact, catching
+dependencies that exist in the repository but were not deployed.
 
-- verifies required site files and the image directory;
-- checks local HTML links and asset references, including character images;
-- checks CSS `url(...)` references;
-- runs `node --check` on inline scripts and any JavaScript files that exist.
-
-The checks use Bash, Python's standard library, and Node.js. GitHub-hosted
-runners provide all three; local contributors need them available on `PATH`.
-
-To inspect the exact Pages package without committing generated output:
+For a Pages-subpath preview:
 
 ```bash
-./scripts/build-pages.sh /tmp/which-character-pages
-find /tmp/which-character-pages -type f -print
+preview_root="$(mktemp -d)"
+./scripts/build-pages.sh "$preview_root/which-character-are-you"
+python3 -m http.server 8001 --directory "$preview_root"
 ```
 
-## Deployment
+Open <http://localhost:8001/which-character-are-you/>. Check quick/full/refine,
+reload/resume, back/reset, Sesame, sample results, recipient links, malformed
+links, copy/download, keyboard operation, and mobile layouts.
 
-`.github/workflows/deploy.yml` deploys pushes to `main` and supports manual
-runs. It validates the source, stages only the public HTML, CSS, SVG images,
-and a generated `.nojekyll` file, uploads that directory as the Pages artifact,
-and deploys it through GitHub Pages.
+## Deployment and contributing
 
-The workflow does not publish the repository root. README files, design
-documents, scripts, Git metadata, and workflow definitions are excluded from
-the deployed artifact. The public image credits page is included with the
-deployed quiz pages.
+GitHub Actions validates tests and site references on pushes and pull requests.
+The Pages workflow deploys pushes to `main` and supports manual runs.
+`scripts/build-pages.sh` creates an explicit allowlisted artifact: production
+HTML, named runtime modules/data/styles, local image formats, and `.nojekyll`.
+It does not upload the repository root. Prototypes, tests, documentation,
+analysis scripts, package metadata, and Git/workflow files remain unpublished.
 
-`.github/workflows/validate.yml` runs validation and a packaging smoke test for
-pushes and pull requests.
+Add new runtime dependencies explicitly to the packaging allowlist. Keep all
+links project-subpath safe, preserve the production character IDs, add focused
+tests for behavior changes, and update these notes when the architecture
+changes. Staging uses `_site` or a directory outside the repository and refuses
+unmarked nonempty output directories and symbolic-link public assets.
 
-## Contributing
-
-1. Preview the current site before changing behavior.
-2. Keep content, scoring, and presentation changes focused and reviewable.
-3. Preserve relative links so the site works at a GitHub Pages project path.
-4. Add every new public asset to `scripts/build-pages.sh`; otherwise it will
-   intentionally remain outside the deployed artifact.
-5. Run `./scripts/validate-site.sh` and a local preview before opening a pull
-   request.
-6. Update this README when the current architecture changes, especially when
-   UHCI-backed scoring or separated data modules become real rather than
-   planned.
+Reference-only material includes `henson-personality-index.md`,
+`henson-personality-index-baselines.md`, `muppet-questions.md`, and
+`scripts/analyze-calibration.mjs`. Their broader inventories are not a promise
+of more selectable characters or a future catalog expansion.

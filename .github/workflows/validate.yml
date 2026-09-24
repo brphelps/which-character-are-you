@@ -18,6 +18,9 @@ jobs:
       - name: Check shell syntax
         run: bash -n scripts/*.sh
 
+      - name: Run unit and deployment tests
+        run: npm test
+
       - name: Validate site
         run: ./scripts/validate-site.sh
 
@@ -26,7 +29,13 @@ jobs:
           staging_dir="${RUNNER_TEMP}/pages"
           ./scripts/build-pages.sh "$staging_dir"
           test -f "$staging_dir/index.html"
+          test -f "$staging_dir/results.html"
+          test -f "$staging_dir/js/results-view.js"
+          test -f "$staging_dir/styles/results.css"
           test -f "$staging_dir/.nojekyll"
           test ! -e "$staging_dir/README.md"
           test ! -e "$staging_dir/.github"
           test ! -e "$staging_dir/scripts"
+          test ! -e "$staging_dir/tests"
+          test ! -e "$staging_dir/results-prototype.html"
+          test ! -e "$staging_dir/quiz-prototype.html"

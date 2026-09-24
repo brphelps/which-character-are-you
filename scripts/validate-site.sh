@@ -3,6 +3,7 @@
 set -euo pipefail
 
 repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
+site_root="${1:-"$repo_root"}"
 
 for command in python3 node; do
   if ! command -v "$command" >/dev/null 2>&1; then
@@ -11,37 +12,32 @@ for command in python3 node; do
   fi
 done
 
-required_paths=(
-  index.html
-  muppets.html
-  sesame-street.html
-  styles.css
-  images
-)
-
-for path in "${required_paths[@]}"; do
-  if [[ ! -e "$repo_root/$path" ]]; then
-    echo "Missing required site path: $path" >&2
-    exit 1
-  fi
-done
-
-temporary_dir="$(mktemp -d)"
-trap 'rm -rf -- "$temporary_dir"' EXIT
-
-python3 - "$repo_root" "$temporary_dir" <<'PYTHON'
+python3 - "$site_root" <<'PYTHON'
 from __future__ import annotations
 
 import re
+import subprocess
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 root = Path(sys.argv[1]).resolve()
-script_output = Path(sys.argv[2]).resolve()
 errors: list[str] = []
-references: list[tuple[Path, str]] = []
+references: list[tuple[Path, str, Path, bool]] = []
+scripts: list[tuple[Path, str, bool]] = []
+
+for required in (
+    "index.html", "muppets.html", "sesame-street.html", "credits.html",
+    "results.html", "styles.css", "images",
+):
+    if not (root / required).exists():
+        errors.append(f"Missing required site path: {required}")
+
+
+def reference(source: Path, value: str, base: Path | None = None,
+              module: bool = False) -> None:
+    references.append((source, value, base or source.parent, module))
 
 
 class SiteParser(HTMLParser):
@@ -49,125 +45,108 @@ class SiteParser(HTMLParser):
         super().__init__(convert_charrefs=False)
         self.source = source
         self.inline_script: list[str] | None = None
-        self.inline_script_count = 0
+        self.module = False
 
-    def handle_starttag(
-        self, tag: str, attrs: list[tuple[str, str | None]]
-    ) -> None:
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attributes = dict(attrs)
-
-        for attribute in ("href", "src"):
-            value = attributes.get(attribute)
-            if value:
-                references.append((self.source, value))
-
+        for attribute in ("href", "src", "poster"):
+            if attributes.get(attribute):
+                reference(self.source, attributes[attribute])
         if tag != "script" or attributes.get("src"):
             return
-
         script_type = (attributes.get("type") or "").lower()
         if script_type in {"", "text/javascript", "application/javascript", "module"}:
             self.inline_script = []
+            self.module = script_type == "module"
 
     def handle_data(self, data: str) -> None:
         if self.inline_script is not None:
             self.inline_script.append(data)
 
     def handle_endtag(self, tag: str) -> None:
-        if tag != "script" or self.inline_script is None:
-            return
-
-        self.inline_script_count += 1
-        output = script_output / (
-            f"{self.source.stem}-inline-{self.inline_script_count}.js"
-        )
-        output.write_text("".join(self.inline_script), encoding="utf-8")
-        self.inline_script = None
+        if tag == "script" and self.inline_script is not None:
+            scripts.append((self.source, "".join(self.inline_script), self.module))
+            self.inline_script = None
 
 
 html_files = sorted(root.glob("*.html"))
-if not html_files:
-    errors.append("No root-level HTML files found")
-
-literal_reference = re.compile(
-    r"""\b(?:href|src|image)\s*(?:=|:)\s*["']([^"']+)["']""",
-    re.IGNORECASE,
-)
-
 for html_file in html_files:
-    content = html_file.read_text(encoding="utf-8")
     parser = SiteParser(html_file)
-    parser.feed(content)
+    parser.feed(html_file.read_text(encoding="utf-8"))
     parser.close()
 
-    for match in literal_reference.finditer(content):
-        references.append((html_file, match.group(1)))
+css_files = sorted(root.glob("*.css"))
+if (root / "styles").is_dir():
+    css_files += sorted((root / "styles").rglob("*.css"))
+for css_file in css_files:
+    content = re.sub(r"/\*.*?\*/", "", css_file.read_text(encoding="utf-8"), flags=re.S)
+    for match in re.finditer(r"""url\(\s*["']?([^"')]+)["']?\s*\)""", content, re.I):
+        reference(css_file, match.group(1))
+    for match in re.finditer(r"""@import\s+["']([^"']+)["']""", content, re.I):
+        reference(css_file, match.group(1))
 
-css_reference = re.compile(r"""url\(\s*["']?([^"')]+)["']?\s*\)""", re.IGNORECASE)
-for css_file in sorted(root.glob("*.css")):
-    content = css_file.read_text(encoding="utf-8")
-    for match in css_reference.finditer(content):
-        references.append((css_file, match.group(1)))
+for directory in ("js", "data"):
+    for pattern in ("*.js", "*.mjs"):
+        for script in sorted((root / directory).rglob(pattern)):
+            scripts.append((script, script.read_text(encoding="utf-8"), True))
 
-external_schemes = {"data", "http", "https", "mailto", "tel", "javascript"}
-checked: set[tuple[Path, str]] = set()
+# Runtime modules use literal relative imports; variable imports require a
+# separate browser test. Asset metadata is document-relative, unlike imports.
+module_reference = re.compile(
+    r"""\b(?:import|export)\s+(?:[^;"']*?\s+from\s*)?["']([^"']+)["']"""
+    r"""|\bimport\s*\(\s*["']([^"']+)["']\s*\)""",
+    re.M,
+)
+asset_reference = re.compile(r"""\b(?:href|src|image)\s*(?:=|:)\s*["']([^"'${}]+)["']""")
+url_reference = re.compile(r"""\bnew\s+URL\(\s*["']([^"']+)["']\s*,\s*import\.meta\.url\s*\)""")
+for source, content, module in scripts:
+    result = subprocess.run(
+        ["node", "--input-type=module" if module else "--input-type=commonjs", "--check"],
+        input=content, text=True, capture_output=True,
+    )
+    if result.returncode:
+        errors.append(f"{source.relative_to(root)}: JavaScript syntax error\n{result.stderr}")
+    for match in module_reference.finditer(content):
+        reference(source, match.group(1) or match.group(2), module=True)
+    for match in asset_reference.finditer(content):
+        reference(source, match.group(1), root if source.suffix != ".html" else source.parent)
+    for match in url_reference.finditer(content):
+        reference(source, match.group(1))
 
-for source, reference in references:
-    reference = reference.strip()
-    key = (source, reference)
-    if not reference or key in checked:
+checked: set[tuple[Path, str, Path, bool]] = set()
+for source, value, base, module in references:
+    value = value.strip()
+    key = (source, value, base, module)
+    if not value or key in checked:
         continue
     checked.add(key)
-
-    split = urlsplit(reference)
-    if split.scheme.lower() in external_schemes or split.netloc:
+    split = urlsplit(value)
+    if split.scheme or split.netloc:
+        if module:
+            errors.append(f"{source.relative_to(root)}: non-local runtime import: {value}")
         continue
     if not split.path:
         continue
-
     decoded_path = unquote(split.path)
     if decoded_path.startswith("/"):
-        target = root / decoded_path.lstrip("/")
-    else:
-        target = source.parent / decoded_path
-
-    target = target.resolve()
-    try:
-        target.relative_to(root)
-    except ValueError:
-        errors.append(
-            f"{source.relative_to(root)}: reference escapes repository: {reference}"
-        )
+        errors.append(f"{source.relative_to(root)}: root-relative reference breaks Pages subpaths: {value}")
         continue
-
-    if not target.exists():
-        errors.append(
-            f"{source.relative_to(root)}: missing local reference: {reference}"
-        )
+    if module and not decoded_path.startswith(("./", "../")):
+        errors.append(f"{source.relative_to(root)}: bare runtime import: {value}")
+        continue
+    target = (base / decoded_path).resolve()
+    if not target.is_relative_to(root):
+        errors.append(f"{source.relative_to(root)}: reference escapes site: {value}")
+    elif not target.exists():
+        errors.append(f"{source.relative_to(root)}: missing local reference: {value}")
 
 if errors:
     for error in errors:
         print(error, file=sys.stderr)
     raise SystemExit(1)
 
-print(
-    f"Checked {len(html_files)} HTML files and "
-    f"{len(checked)} unique local/external references"
-)
+print(f"Checked {len(html_files)} HTML files, {len(css_files)} stylesheets, "
+      f"{len(scripts)} scripts and {len(checked)} references")
 PYTHON
-
-while IFS= read -r -d '' script; do
-  node --check "$script"
-done < <(
-  find "$repo_root" \
-    -type f \
-    -name '*.js' \
-    -not -path "$repo_root/.git/*" \
-    -not -path "$repo_root/_site/*" \
-    -print0
-)
-
-while IFS= read -r -d '' script; do
-  node --check "$script"
-done < <(find "$temporary_dir" -type f -name '*.js' -print0)
 
 echo "Static site validation passed"

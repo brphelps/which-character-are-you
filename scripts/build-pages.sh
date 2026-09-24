@@ -72,17 +72,6 @@ public_files=(
   styles/results.css
 )
 
-# Only these named optional dependencies may join the artifact. Reference
-# validation below still fails if an imported dependency is absent.
-optional_files=(
-  styles/sharing.css
-)
-for file in "${optional_files[@]}"; do
-  if [[ -e "$repo_root/$file" ]]; then
-    public_files+=("$file")
-  fi
-done
-
 for directory in js data styles images; do
   if [[ -L "$repo_root/$directory" ]]; then
     echo "Refusing symbolic-link public directory: $directory" >&2

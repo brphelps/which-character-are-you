@@ -44,6 +44,7 @@ public_files=(
   index.html
   muppets.html
   sesame-street.html
+  credits.html
   styles.css
 )
 
@@ -55,11 +56,17 @@ for file in "${public_files[@]}"; do
 done
 
 shopt -s nullglob
-image_files=("$repo_root"/images/*.svg)
+image_files=(
+  "$repo_root"/images/*.jpg
+  "$repo_root"/images/*.jpeg
+  "$repo_root"/images/*.png
+  "$repo_root"/images/*.webp
+  "$repo_root"/images/*.svg
+)
 shopt -u nullglob
 
 if (( ${#image_files[@]} == 0 )); then
-  echo "No SVG character images found in images/" >&2
+  echo "No character images found in images/" >&2
   exit 1
 fi
 

@@ -401,6 +401,39 @@ footer {
     text-align: left;
 }
 
+.credits-page main {
+    max-width: 900px;
+    margin: 0 auto 50px;
+    padding: clamp(28px, 5vw, 56px);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.credits-page h1 {
+    margin-bottom: 18px;
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    letter-spacing: -0.055em;
+    line-height: 0.95;
+}
+
+.credits-page h2 {
+    margin: 44px 0 16px;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+}
+
+.credits-page li {
+    margin: 0 0 14px 1.25rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+}
+
+.credits-page .license-note {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
 /* Shared quiz pages */
 
 .quiz-container {

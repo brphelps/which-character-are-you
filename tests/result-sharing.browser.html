@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Local PNG sharing checks</title>
+    <style>
+        body { margin: 2rem; background: #f8f5ff; color: #34256f; font: 1rem system-ui, sans-serif; }
+        #cards { display: flex; flex-wrap: wrap; gap: 1rem; }
+        #cards img { width: min(100%, 36rem); height: auto; }
+    </style>
+</head>
+<body>
+    <h1>Local PNG sharing checks</h1>
+    <p>This browser-only check uses local portraits and intercepts download clicks. No files are saved.</p>
+    <pre id="status" role="status">Running...</pre>
+    <div id="cards"></div>
+    <script type="module">
+        import { createCharacterShareUrl, downloadResultCard } from "../js/result-sharing.js";
+
+        const status = document.querySelector("#status");
+        const currentHref = new URL("../muppets.html?private=answer#private-profile", location.href).href;
+        const portraits = [
+            ["kermit", "Kermit the Frog"], ["miss-piggy", "Miss Piggy"],
+            ["fozzie", "Fozzie Bear"], ["gonzo", "Gonzo"], ["animal", "Animal"],
+            ["rowlf", "Rowlf the Dog"], ["scooter", "Scooter"],
+            ["statler-waldorf", "Statler and Waldorf"], ["swedish-chef", "The Swedish Chef"],
+            ["beaker", "Beaker"], ["sam-eagle", "Sam the Eagle"], ["rizzo", "Rizzo"],
+            ["pepe", "Pepe"], ["bunsen", "Dr. Bunsen Honeydew"], ["walter", "Walter"],
+            ["elmo", "Elmo"], ["cookie", "Cookie Monster"], ["oscar", "Oscar the Grouch"],
+            ["big-bird", "Big Bird"]
+        ];
+        const fixtures = portraits.map(([id, name]) => ({
+            id, name, image: `images/${id === "cookie" ? "cookie-monster" : id}.jpg`,
+            description: "A playful character sketch, with room for a little unexpected fun. This is a sample for checking the card layout, not a description of anyone who takes the quiz."
+        }));
+        const originalCreateUrl = URL.createObjectURL;
+        const originalClick = HTMLAnchorElement.prototype.click;
+        const originalFillText = CanvasRenderingContext2D.prototype.fillText;
+        let lastBlob;
+        let clicks = 0;
+        const text = [];
+        function assert(value, message) {
+            if (!value) throw new Error(message);
+        }
+        URL.createObjectURL = (blob) => {
+            lastBlob = blob;
+            return originalCreateUrl(blob);
+        };
+        HTMLAnchorElement.prototype.click = function () {
+            assert(this.download.endsWith(".png"), "Download extension must be PNG.");
+            clicks += 1;
+        };
+        CanvasRenderingContext2D.prototype.fillText = function (value, x, y, ...args) {
+            assert(x + this.measureText(value).width < 1200, `Text overflow: ${value}`);
+            assert(y < 1200, `Vertical overflow: ${value}`);
+            text.push(value);
+            return originalFillText.call(this, value, x, y, ...args);
+        };
+        try {
+            for (const [index, character] of fixtures.entries()) {
+                const mode = ["quick", "full", "example", "shared"][index % 4];
+                const output = await downloadResultCard(character, { mode, currentHref });
+                assert(output.url === createCharacterShareUrl(character, currentHref), "Returned URL changed.");
+                assert(!output.url.includes("private"), "A private query or hash escaped into a link.");
+                assert(lastBlob.type === "image/png" && lastBlob.size > 10000, "PNG is empty or invalid.");
+                const bitmap = await createImageBitmap(lastBlob);
+                assert(bitmap.width === 1200 && bitmap.height === 1200, "Unexpected PNG size.");
+                bitmap.close();
+                if ([0, 7, 13, 16].includes(index)) {
+                    const preview = document.createElement("img");
+                    preview.src = originalCreateUrl(lastBlob);
+                    preview.alt = `${mode} card preview: ${character.name}`;
+                    document.querySelector("#cards").append(preview);
+                }
+            }
+            assert(clicks === 19, "Every local character must download.");
+            assert(text.some((line) => line.includes("PROVISIONAL")), "Missing quick-result qualification.");
+            assert(text.includes("SAMPLE CHARACTER") && text.includes("SHARED CHARACTER"), "Misleading non-earned label.");
+            assert(text.some((line) => line.includes("credits.html")), "Missing image credits.");
+            let rejected = false;
+            try {
+                await downloadResultCard({ ...fixtures[0], image: "images/not-a-real-character.jpg" }, { currentHref });
+            } catch (error) {
+                rejected = /portrait could not be loaded/.test(error.message);
+            }
+            assert(rejected && clicks === 19, "Missing portraits must fail without a download.");
+            status.dataset.result = "passed";
+            status.textContent = "PASS: 19 local portraits, all four labels, PNG encoding/size, text bounds, privacy, credits, and image failure.";
+        } catch (error) {
+            status.dataset.result = "failed";
+            status.textContent = `FAIL: ${error.message}`;
+        } finally {
+            URL.createObjectURL = originalCreateUrl;
+            HTMLAnchorElement.prototype.click = originalClick;
+            CanvasRenderingContext2D.prototype.fillText = originalFillText;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An accessible one-question-at-a-time character quiz prototype.">
+    <title>Character Quiz Interaction Prototype</title>
+    <link rel="stylesheet" href="styles/quiz.css">
+</head>
+<body>
+    <main class="prototype-shell">
+        <header class="prototype-header">
+            <p class="eyebrow">Interaction prototype</p>
+            <h1>Which character are you?</h1>
+            <p class="intro">Choose the response that feels most like you. Your progress is saved on this device.</p>
+        </header>
+
+        <section class="quiz-card" aria-labelledby="quiz-title">
+            <div class="quiz-card__topline">
+                <div>
+                    <h2 id="quiz-title">Personality check-in</h2>
+                    <p id="quiz-step-status" class="step-status" data-quiz-step-status></p>
+                </div>
+                <button class="text-button" type="button" data-quiz-reset>Reset answers</button>
+            </div>
+
+            <div class="progress-panel">
+                <progress class="progress-bar" data-quiz-progress value="1" max="6" aria-label="Quiz progress">
+                    Question 1 of 6
+                </progress>
+                <p class="answered-count" data-quiz-answered-count aria-live="polite"></p>
+            </div>
+
+            <p class="save-status" data-quiz-save-status role="status" aria-live="polite"></p>
+
+            <form data-quiz-form novalidate>
+                <div data-quiz-question></div>
+
+                <p class="quiz-error" data-quiz-error role="alert" aria-live="assertive"></p>
+
+                <div class="quiz-actions">
+                    <button class="button button--secondary" type="button" data-quiz-back>Back</button>
+                    <button class="button button--primary" type="submit" data-quiz-next>Next</button>
+                </div>
+            </form>
+
+            <section class="completion" data-quiz-completion hidden tabindex="-1" aria-labelledby="completion-title">
+                <div class="completion__icon" aria-hidden="true">✓</div>
+                <h2 id="completion-title">Responses ready</h2>
+                <p>You answered every question. This prototype now passes the ordered responses to the completion callback without calculating a character.</p>
+                <dl class="response-summary" data-quiz-summary></dl>
+                <button class="button button--primary" type="button" data-quiz-restart>Start again</button>
+            </section>
+        </section>
+
+        <p class="keyboard-note">
+            <strong>Keyboard:</strong> Tab to an answer and use the arrow keys, or use number keys while the question heading is focused.
+        </p>
+
+        <noscript>
+            <p class="noscript-message">This prototype needs JavaScript enabled to display the quiz.</p>
+        </noscript>
+    </main>
+
+    <script type="module">
+        import { createQuizController } from "./js/quiz-controller.js";
+
+        const responseScale = [
+            { value: 1, label: "Strongly disagree" },
+            { value: 2, label: "Disagree" },
+            { value: 3, label: "Somewhat disagree" },
+            { value: 4, label: "Slightly disagree" },
+            { value: 5, label: "Neutral" },
+            { value: 6, label: "Slightly agree" },
+            { value: 7, label: "Somewhat agree" },
+            { value: 8, label: "Agree" },
+            { value: 9, label: "Mostly agree" },
+            { value: 10, label: "Strongly agree" }
+        ];
+
+        const questions = [
+            {
+                id: "event-drive",
+                prompt: "I usually initiate action rather than wait for others to decide what happens.",
+                options: responseScale
+            },
+            {
+                id: "emotional-containment",
+                prompt: "I can stay composed even when things go wrong.",
+                options: responseScale
+            },
+            {
+                id: "social-aim",
+                prompt: "Helping others succeed is more important to me than being recognized.",
+                options: responseScale
+            },
+            {
+                id: "reality-lens",
+                prompt: "I enjoy nonsense, exaggeration, or illogical humor.",
+                options: responseScale
+            },
+            {
+                id: "show-awareness",
+                prompt: "I am aware of how I appear to an audience, even in serious moments.",
+                options: responseScale
+            },
+            {
+                id: "behavioral-stability",
+                prompt: "My personality stays consistent across different situations.",
+                options: responseScale
+            }
+        ];
+
+        const controller = createQuizController({
+            root: document.querySelector(".quiz-card"),
+            questions,
+            storageKey: "which-character-are-you:quiz-prototype:v1",
+            onComplete(responses) {
+                // Integration point: pass responses to the scoring engine here.
+                console.info("Quiz responses ready for scoring:", responses);
+            }
+        });
+
+        window.quizPrototype = controller;
+    </script>
+</body>
+</html>

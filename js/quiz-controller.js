@@ -1,4 +1,4 @@
-const STORAGE_VERSION = 1;
+const STORAGE_VERSION = 2;
 const DEFAULT_STORAGE_KEY = "which-character-are-you:quiz:v1";
 
 function isInteractiveTarget(target) {
@@ -49,6 +49,7 @@ function validateQuestions(questions) {
             if (
                 !option
                 || !["string", "number"].includes(typeof option.value)
+                || (typeof option.value === "number" && !Number.isFinite(option.value))
                 || typeof option.label !== "string"
                 || option.label.length === 0
             ) {
@@ -66,10 +67,35 @@ function validateQuestions(questions) {
     });
 }
 
+export function restoreQuizState(state, questionBank, questions, journeyId) {
+    if (
+        !state || state.version !== STORAGE_VERSION
+        || !state.answers || typeof state.answers !== "object" || Array.isArray(state.answers)
+    ) {
+        throw new TypeError("Saved quiz progress uses an unsupported format.");
+    }
+
+    const answers = Object.fromEntries(questionBank.flatMap((question) => {
+        const value = Object.hasOwn(state.answers, question.id) ? state.answers[question.id] : undefined;
+        return question.options.some((option) => option.value === value) ? [[question.id, value]] : [];
+    }));
+    const firstUnanswered = questions.findIndex((question) => !Object.hasOwn(answers, question.id));
+    const savedIndex = questions.findIndex((question) => question.id === state.currentQuestionId);
+    const sameJourney = state.journeyId === journeyId;
+    return {
+        answers,
+        currentIndex: sameJourney && savedIndex >= 0 ? savedIndex : Math.max(firstUnanswered, 0),
+        completed: firstUnanswered === -1 && (!sameJourney || state.completed === true),
+        discardedAnswers: Object.keys(answers).length !== Object.keys(state.answers).length
+    };
+}
+
 export class QuizController {
     constructor({
         root,
         questions,
+        questionBank = questions,
+        journeyId = "default",
         storageKey = DEFAULT_STORAGE_KEY,
         onComplete = () => {}
     }) {
@@ -81,14 +107,18 @@ export class QuizController {
             throw new TypeError("QuizController onComplete must be a function.");
         }
 
-        validateQuestions(questions);
+        validateQuestions(questionBank);
 
         this.root = root;
+        this.questionBank = questionBank;
+        this.validateJourney(questions);
         this.questions = questions;
+        this.journeyId = journeyId;
         this.storageKey = storageKey;
         this.onComplete = onComplete;
         this.answers = {};
         this.currentIndex = 0;
+        this.completed = false;
         this.storageAvailable = true;
 
         this.elements = {
@@ -111,12 +141,16 @@ export class QuizController {
         if (missingElement) {
             throw new Error(`QuizController could not find [data-quiz-${missingElement[0]}].`);
         }
+        this.elements.review = root.querySelector("[data-quiz-review]");
+        this.elements.edit = root.querySelector("[data-quiz-edit]");
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleBack = this.handleBack.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleKeydown = this.handleKeydown.bind(this);
         this.handleReset = this.handleReset.bind(this);
+        this.handleReview = () => this.editQuestion(this.elements.review.value);
+        this.handleEdit = () => this.editQuestion(this.questions[0].id);
 
         this.elements.form.addEventListener("submit", this.handleSubmit);
         this.elements.form.addEventListener("change", this.handleChange);
@@ -124,9 +158,52 @@ export class QuizController {
         this.elements.back.addEventListener("click", this.handleBack);
         this.elements.reset.addEventListener("click", this.handleReset);
         this.elements.restart.addEventListener("click", this.handleReset);
+        this.elements.review?.addEventListener("change", this.handleReview);
+        this.elements.edit?.addEventListener("click", this.handleEdit);
 
         this.restore();
-        this.render({ moveFocus: false });
+        if (this.completed) {
+            this.complete({ moveFocus: false });
+        } else {
+            this.render({ moveFocus: false });
+        }
+    }
+
+    validateJourney(questions) {
+        validateQuestions(questions);
+        for (const question of questions) {
+            const original = this.questionBank.find((candidate) => candidate.id === question.id);
+            if (!original || question.options.length !== original.options.length
+                || question.options.some((option, index) => option.value !== original.options[index].value)) {
+                throw new TypeError(`Question "${question.id}" must belong to the saved answer bank.`);
+            }
+        }
+    }
+
+    setQuestions(questions, { journeyId = this.journeyId, moveFocus = true } = {}) {
+        this.validateJourney(questions);
+        this.questions = questions;
+        this.journeyId = journeyId;
+        const firstUnanswered = questions.findIndex((question) => !Object.hasOwn(this.answers, question.id));
+        this.currentIndex = Math.max(firstUnanswered, 0);
+        this.completed = false;
+        if (firstUnanswered === -1) {
+            this.complete({ moveFocus });
+        } else {
+            this.persist();
+            this.render({ moveFocus });
+        }
+    }
+
+    editQuestion(questionId) {
+        const index = this.questions.findIndex((question) => question.id === questionId);
+        if (index < 0) {
+            throw new RangeError(`Question "${questionId}" is not part of this quiz.`);
+        }
+        this.currentIndex = index;
+        this.completed = false;
+        this.persist();
+        this.render();
     }
 
     getResponses() {
@@ -141,9 +218,12 @@ export class QuizController {
     reset({ moveFocus = true } = {}) {
         this.answers = {};
         this.currentIndex = 0;
+        this.completed = false;
         const progressCleared = this.clearStoredProgress();
         this.elements.form.hidden = false;
         this.elements.completion.hidden = true;
+        this.elements.summary.innerHTML = "";
+        this.root.querySelector("[data-quiz-result]")?.replaceChildren();
         this.elements.saveStatus.textContent = progressCleared
             ? "Saved progress cleared."
             : "Answers reset, but saved progress could not be cleared.";
@@ -157,9 +237,13 @@ export class QuizController {
         this.elements.back.removeEventListener("click", this.handleBack);
         this.elements.reset.removeEventListener("click", this.handleReset);
         this.elements.restart.removeEventListener("click", this.handleReset);
+        this.elements.review?.removeEventListener("change", this.handleReview);
+        this.elements.edit?.removeEventListener("click", this.handleEdit);
     }
 
     render({ moveFocus = true } = {}) {
+        this.elements.form.hidden = false;
+        this.elements.completion.hidden = true;
         const question = this.questions[this.currentIndex];
         const questionNumber = this.currentIndex + 1;
         const totalQuestions = this.questions.length;
@@ -182,7 +266,6 @@ export class QuizController {
                         ${checked}
                     >
                     <span class="answer-option__shortcut" aria-hidden="true">${shortcut}</span>
-                    <span class="answer-option__value">${escapeHtml(option.value)}</span>
                     <span class="answer-option__label">${escapeHtml(option.label)}</span>
                 </label>
             `;
@@ -195,7 +278,10 @@ export class QuizController {
                     ${escapeHtml(question.prompt)}
                 </legend>
                 <p class="question-hint" id="${escapeHtml(hintId)}">
-                    Choose one answer. Number keys 1–9 select those values; 0 selects 10.
+                    Choose what feels closest; there is no right answer.
+                    ${question.options.length <= 10
+                        ? `Number keys 1–${Math.min(question.options.length, 9)} choose an option${question.options.length === 10 ? "; 0 chooses the last" : ""}.`
+                        : ""}
                 </p>
                 <div class="answer-grid">${options}</div>
             </fieldset>
@@ -204,10 +290,9 @@ export class QuizController {
         this.elements.error.id = errorId;
         this.elements.error.textContent = "";
         this.elements.back.disabled = this.currentIndex === 0;
-        this.elements.next.textContent = questionNumber === totalQuestions ? "Complete quiz" : "Next";
+        this.elements.next.textContent = this.getResponses().length === totalQuestions
+            || questionNumber === totalQuestions ? "See my result" : "Next";
         this.elements.progress.max = totalQuestions;
-        this.elements.progress.value = questionNumber;
-        this.elements.progress.textContent = `Question ${questionNumber} of ${totalQuestions}`;
         this.elements.stepStatus.textContent = `Question ${questionNumber} of ${totalQuestions}`;
         this.updateAnsweredCount();
 
@@ -217,7 +302,7 @@ export class QuizController {
     }
 
     handleChange(event) {
-        const input = event.target.closest("input[type='radio']");
+        const input = event.target instanceof Element ? event.target.closest("input[type='radio']") : null;
         if (!input) {
             return;
         }
@@ -232,6 +317,9 @@ export class QuizController {
         this.elements.error.textContent = "";
         this.persist();
         this.updateAnsweredCount();
+        if (this.getResponses().length === this.questions.length) {
+            this.elements.next.textContent = "See my result";
+        }
     }
 
     handleSubmit(event) {
@@ -244,7 +332,10 @@ export class QuizController {
             return;
         }
 
-        if (this.currentIndex < this.questions.length - 1) {
+        if (this.getResponses().length === this.questions.length) {
+            this.complete();
+            return;
+        } else if (this.currentIndex < this.questions.length - 1) {
             this.currentIndex += 1;
             this.persist();
             this.render();
@@ -271,7 +362,8 @@ export class QuizController {
             || event.altKey
             || event.ctrlKey
             || event.metaKey
-            || isInteractiveTarget(event.target)
+            || (isInteractiveTarget(event.target) && !event.target.matches("input[type='radio']"))
+            || !/^[0-9]$/.test(event.key)
         ) {
             return;
         }
@@ -301,32 +393,61 @@ export class QuizController {
         const answered = this.getResponses().length;
         const total = this.questions.length;
         this.elements.answeredCount.textContent = `${answered} of ${total} answered`;
+        this.elements.progress.max = total;
+        this.elements.progress.value = answered;
+        this.elements.progress.textContent = `${answered} of ${total} answered`;
+        this.elements.progress.setAttribute("aria-valuetext", `${answered} of ${total} answered`);
+        if (this.elements.review) {
+            this.elements.review.innerHTML = this.questions.map((question, index) => `
+                <option value="${escapeHtml(question.id)}"${index === this.currentIndex ? " selected" : ""}>
+                    ${index + 1}. ${Object.hasOwn(this.answers, question.id) ? "Answered" : "Not yet answered"}: ${escapeHtml(question.prompt)}
+                </option>
+            `).join("");
+        }
     }
 
-    complete() {
+    complete({ moveFocus = true } = {}) {
+        const firstUnanswered = this.questions.findIndex((question) => !Object.hasOwn(this.answers, question.id));
+        if (firstUnanswered !== -1) {
+            this.currentIndex = firstUnanswered;
+            this.persist();
+            this.render({ moveFocus });
+            this.elements.error.textContent = "There is still an unanswered question. Choose an answer to continue.";
+            return;
+        }
         const responses = this.getResponses();
-        const progressCleared = this.clearStoredProgress();
         this.elements.form.hidden = true;
         this.elements.completion.hidden = false;
-        this.elements.progress.value = this.questions.length;
+        this.updateAnsweredCount();
         this.elements.stepStatus.textContent = "Quiz complete";
-        this.elements.answeredCount.textContent = `${this.questions.length} of ${this.questions.length} answered`;
-        this.elements.saveStatus.textContent = progressCleared
-            ? "Completed responses are ready for scoring."
-            : "Responses are ready, but saved progress could not be cleared.";
         this.elements.summary.innerHTML = responses.map((response, index) => {
             const question = this.questions[index];
             const option = question.options.find((candidate) => candidate.value === response.value);
             return `
                 <div>
                     <dt>${escapeHtml(question.prompt)}</dt>
-                    <dd>${escapeHtml(response.value)} — ${escapeHtml(option?.label ?? "Selected")}</dd>
+                    <dd>${escapeHtml(option.label)}</dd>
                 </div>
             `;
         }).join("");
 
-        this.elements.completion.focus();
-        this.onComplete(responses, this);
+        try {
+            this.onComplete(responses, this);
+        } catch (error) {
+            this.completed = false;
+            this.persist();
+            this.render({ moveFocus: false });
+            this.elements.error.textContent = "We could not show your result. Your answers are still here. Please try again.";
+            this.elements.error.tabIndex = -1;
+            this.elements.error.focus();
+            console.error("Unable to show quiz result.", error);
+            return;
+        }
+        this.completed = true;
+        this.persist();
+        if (moveFocus) {
+            this.elements.completion.focus();
+        }
         this.root.dispatchEvent(new CustomEvent("quiz:complete", {
             bubbles: true,
             detail: { responses }
@@ -341,7 +462,9 @@ export class QuizController {
         try {
             localStorage.setItem(this.storageKey, JSON.stringify({
                 version: STORAGE_VERSION,
-                currentIndex: this.currentIndex,
+                journeyId: this.journeyId,
+                currentQuestionId: this.questions[this.currentIndex].id,
+                completed: this.completed,
                 answers: this.answers
             }));
             this.elements.saveStatus.textContent = "Progress saved on this device.";
@@ -353,41 +476,39 @@ export class QuizController {
     }
 
     restore() {
+        let rawState;
         try {
-            const rawState = localStorage.getItem(this.storageKey);
-            if (!rawState) {
-                return;
-            }
-
-            const state = JSON.parse(rawState);
-            if (state.version !== STORAGE_VERSION || typeof state.answers !== "object" || state.answers === null) {
-                this.clearStoredProgress();
-                return;
-            }
-
-            this.answers = Object.fromEntries(this.questions.flatMap((question) => {
-                const savedValue = state.answers[question.id];
-                const isValid = question.options.some((option) => option.value === savedValue);
-                return isValid ? [[question.id, savedValue]] : [];
-            }));
-            this.currentIndex = Number.isInteger(state.currentIndex)
-                ? Math.min(Math.max(state.currentIndex, 0), this.questions.length - 1)
-                : 0;
-            this.elements.saveStatus.textContent = "Saved progress restored.";
+            rawState = localStorage.getItem(this.storageKey);
         } catch (error) {
             this.storageAvailable = false;
-            this.elements.saveStatus.textContent = "Saved progress could not be restored.";
+            this.elements.saveStatus.textContent = "Saved progress cannot be read or saved in this browser. You can still take the quiz.";
             console.error("Unable to restore quiz progress.", error);
+            return;
+        }
+        if (!rawState) {
+            return;
+        }
+        try {
+            const state = restoreQuizState(JSON.parse(rawState), this.questionBank, this.questions, this.journeyId);
+            this.answers = state.answers;
+            this.currentIndex = state.currentIndex;
+            this.completed = state.completed;
+            this.elements.saveStatus.textContent = state.discardedAnswers
+                ? "Saved progress restored. Some outdated answers were not restored."
+                : "Saved progress restored on this device.";
+        } catch (error) {
+            const cleared = this.clearStoredProgress();
+            this.elements.saveStatus.textContent = cleared
+                ? "Old or unreadable saved progress was cleared. Please start a fresh quiz."
+                : "Old or unreadable progress could not be cleared. You can still take a fresh quiz.";
+            console.warn("Discarded invalid saved quiz progress.", error);
         }
     }
 
     clearStoredProgress() {
-        if (!this.storageAvailable) {
-            return false;
-        }
-
         try {
             localStorage.removeItem(this.storageKey);
+            this.storageAvailable = true;
             return true;
         } catch (error) {
             this.storageAvailable = false;

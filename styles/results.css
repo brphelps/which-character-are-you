@@ -40,8 +40,13 @@ body {
 }
 
 button,
-input {
+input,
+select {
     font: inherit;
+}
+
+[hidden] {
+    display: none !important;
 }
 
 a {
@@ -76,6 +81,10 @@ a {
     width: min(1180px, calc(100% - 2rem));
     margin: 0 auto;
     padding: 1.25rem 0;
+}
+
+.site-header .button {
+    flex-shrink: 0;
 }
 
 .brand {
@@ -141,6 +150,16 @@ a {
     margin: 0;
     color: var(--muted);
     font-size: 1.05rem;
+}
+
+.result-depth {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 0.5rem 0.8rem;
+    color: var(--brand-dark);
+    background: var(--brand-soft);
+    border-radius: 0.6rem;
+    font-weight: 800;
 }
 
 .hero-card {
@@ -285,9 +304,65 @@ a {
 
 .profile-layout {
     display: grid;
-    grid-template-columns: minmax(18rem, 1fr) minmax(18rem, 0.8fr);
-    align-items: center;
-    gap: clamp(2rem, 6vw, 5rem);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.chart-block {
+    min-width: 0;
+    position: sticky;
+    top: 1rem;
+}
+
+.profile-section {
+    scroll-margin-top: 1rem;
+}
+
+.comparison-controls {
+    margin-bottom: 2rem;
+}
+
+.comparison-controls label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+}
+
+.comparison-select {
+    width: min(100%, 30rem);
+    min-height: 3rem;
+    padding: 0.6rem;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--brand);
+    border-radius: 0.65rem;
+}
+
+.chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    font-weight: 750;
+}
+
+.legend-you {
+    color: var(--brand-dark);
+    border-bottom: 3px solid var(--brand);
+}
+
+.legend-character {
+    color: #99451c;
+    border-bottom: 3px dashed #b55120;
+}
+
+.comparison-status {
+    min-height: 1.5em;
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    color: var(--muted);
 }
 
 .profile-chart {
@@ -320,9 +395,22 @@ a {
 }
 
 .radar-point {
-    fill: var(--accent);
+    fill: var(--brand);
     stroke: #ffffff;
     stroke-width: 2;
+}
+
+.radar-comparison {
+    fill: rgba(181, 81, 32, 0.08);
+    stroke: #b55120;
+    stroke-width: 3;
+    stroke-dasharray: 7 5;
+    stroke-linejoin: round;
+}
+
+.radar-tick {
+    fill: var(--muted);
+    font-size: 11px;
 }
 
 .radar-label {
@@ -348,14 +436,85 @@ a {
     border-radius: 0.85rem;
 }
 
-.dimension-item dt {
+.dimension-item h3 {
+    margin: 0;
+    font-size: 1rem;
     font-weight: 850;
 }
 
-.dimension-item dd {
+.dimension-description {
     margin: 0.25rem 0 0;
     color: var(--muted);
     font-size: 0.9rem;
+}
+
+.spectrum-anchors {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.8rem;
+    font-size: 0.8rem;
+}
+
+.spectrum-anchors span {
+    flex: 1;
+}
+
+.spectrum-anchors span:last-child {
+    text-align: right;
+}
+
+.spectrum-track {
+    position: relative;
+    height: 0.55rem;
+    margin: 1rem 0.4rem;
+    background: linear-gradient(to right, #dfd8ff, #b5a5e9);
+    border: 1px solid #9584bd;
+    border-radius: 999px;
+}
+
+.spectrum-track::after {
+    position: absolute;
+    top: -0.2rem;
+    bottom: -0.2rem;
+    left: 50%;
+    border-left: 1px solid var(--muted);
+    content: "";
+}
+
+.spectrum-marker {
+    position: absolute;
+    z-index: 1;
+    width: 0.85rem;
+    height: 0.85rem;
+    border: 2px solid var(--surface);
+    outline: 1px solid var(--ink);
+}
+
+.spectrum-marker--you {
+    top: -0.45rem;
+    background: var(--brand);
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+
+.spectrum-marker--character {
+    top: 0.25rem;
+    background: #b55120;
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.spectrum-values {
+    margin: 0;
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 750;
+}
+
+.spectrum-difference {
+    margin: 0.2rem 0 0;
+    color: var(--muted);
+    font-size: 0.85rem;
 }
 
 .dimension-code {
@@ -485,6 +644,62 @@ a {
     font-weight: 650;
 }
 
+.compare-button {
+    margin-top: 1rem;
+}
+
+.all-matches summary {
+    cursor: pointer;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-weight: 800;
+}
+
+.ranking-list {
+    padding-left: 1.6rem;
+}
+
+.ranking-item {
+    margin: 0.6rem 0;
+    padding-left: 0.4rem;
+}
+
+.ranking-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.65rem 0.8rem;
+    overflow: hidden;
+    color: var(--ink);
+    background: var(--surface-soft);
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    text-align: left;
+    cursor: pointer;
+}
+
+.ranking-button:hover {
+    border-color: var(--brand);
+}
+
+.ranking-bar {
+    position: absolute;
+    inset: 0 auto 0 0;
+    background: var(--brand-soft);
+}
+
+.ranking-name,
+.ranking-button strong {
+    position: relative;
+}
+
+.method-card h2 {
+    margin-top: 0;
+}
+
 .share-card {
     margin-top: clamp(3rem, 8vw, 6rem);
 }
@@ -497,12 +712,16 @@ a {
 }
 
 .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     min-height: 2.9rem;
     padding: 0.7rem 1.2rem;
     border: 2px solid transparent;
     border-radius: 999px;
     cursor: pointer;
     font-weight: 850;
+    text-decoration: none;
 }
 
 .button--primary {
@@ -531,6 +750,30 @@ a {
     font-weight: 800;
 }
 
+.share-opt-in {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-top: 1.25rem;
+    padding: 1rem;
+    background: var(--surface-soft);
+    border-radius: 0.8rem;
+    font-size: 0.95rem;
+}
+
+.share-opt-in input {
+    flex: 0 0 auto;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-top: 0.2rem;
+    accent-color: var(--brand);
+}
+
+.button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
 .share-url {
     width: 100%;
     min-height: 3rem;
@@ -548,6 +791,20 @@ a {
     font-weight: 750;
 }
 
+.result-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.site-footer {
+    padding: 1rem 1rem 2rem;
+    color: var(--muted);
+    text-align: center;
+}
+
 @media (max-width: 820px) {
     .hero-card,
     .profile-layout {
@@ -556,6 +813,10 @@ a {
 
     .hero-card {
         min-height: auto;
+    }
+
+    .chart-block {
+        position: static;
     }
 
     .hero-copy {
@@ -583,15 +844,21 @@ a {
     .match-card h3,
     .match-card .match-score,
     .match-card__description,
-    .match-card__why {
+    .match-card__why,
+    .compare-button {
         grid-column: 2;
     }
 }
 
 @media (max-width: 520px) {
     .site-header {
-        align-items: flex-start;
+        align-items: center;
         gap: 1rem;
+    }
+
+    .site-header .button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
     }
 
     .prototype-label {
@@ -642,9 +909,107 @@ a {
         border: 2px solid ButtonText;
     }
 
-    .radar-profile,
+    .radar-profile {
+        fill: none;
+        stroke: Highlight;
+    }
+
     .radar-point {
         fill: Highlight;
         stroke: CanvasText;
+    }
+
+    .radar-comparison {
+        fill: none;
+        stroke: CanvasText;
+    }
+
+    .spectrum-marker {
+        background: Highlight;
+        outline-color: CanvasText;
+    }
+
+    .spectrum-track {
+        border-color: CanvasText;
+    }
+}
+
+@media print {
+    body {
+        min-width: 0;
+        background: white;
+        color: black;
+    }
+
+    .site-header,
+    .skip-link,
+    .share-card,
+    .result-actions,
+    .comparison-controls select,
+    .comparison-controls label,
+    .comparison-status,
+    .compare-button,
+    .all-matches {
+        display: none;
+    }
+
+    .results-shell {
+        width: 100%;
+        margin: 0;
+    }
+
+    .hero-card {
+        min-height: auto;
+        padding: 1.5rem;
+        color: black;
+        background: white;
+        border: 1px solid #888;
+        grid-template-columns: 1fr 8rem;
+    }
+
+    .hero-card .eyebrow,
+    .hero-description,
+    .match-explanation {
+        color: black;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-copy {
+        order: 0;
+    }
+
+    .character-frame--featured {
+        width: 8rem;
+    }
+
+    .content-card,
+    .hero-card,
+    .match-card {
+        box-shadow: none;
+    }
+
+    .chart-block {
+        position: static;
+    }
+
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .dimension-list {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .dimension-item,
+    .profile-chart,
+    .match-card {
+        break-inside: avoid;
+    }
+
+    .radar-chart {
+        max-width: 20rem;
     }
 }

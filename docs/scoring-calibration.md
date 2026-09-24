@@ -1,5 +1,28 @@
 # UHCI scoring calibration
 
+## Production interpretation
+
+The production Muppet quiz uses the original 15 selectable results, including
+the combined Statler/Waldorf duo, not all 60 reference rows. The default
+six-question preview measures one item per dimension and is explicitly
+provisional. Refining it preserves those answers and collects the remaining
+24 items in the 30-question profile. Neither mode is a validated psychological
+instrument. Sesame Street remains a separate five-question vote quiz with its
+four existing results; the Sesame UHCI geometry below does not describe that
+quiz's scoring.
+
+Production matching uses reverse-scored items where marked, primary-dimension
+averages, and unweighted Euclidean distance on the six 1-10 dimensions.
+Secondary associations are retained as source metadata but are not added to
+the score. The five visible frequency choices now use the symmetric,
+equally spaced mapping `1, 3.25, 5.5, 7.75, 10`, replacing the earlier
+`1, 3, 5, 7, 10`. Reverse scoring is `11 - value`; quick-to-full refinement
+preserves the exact stored numeric answers. This intentionally changes some
+profiles but does not establish improved accuracy. Exact-distance ties use
+ascending production character ID.
+Similarity is `100 * (1 - distance / (9 * sqrt(6)))`; it is not confidence,
+probability, or an empirical measure of personal fit.
+
 ## Scope and data exports
 
 The normalized data preserves the 30 questions from `muppet-questions.md` and
@@ -42,14 +65,16 @@ population standard deviation, distinct values, and same-value pair rate.
 
 This grid is a neutral geometry test, not an estimate of real user traffic.
 Actual questionnaire averages can be fractional and real response
-distributions will not be uniform. Production calibration should repeat the
-analysis with anonymized response data or an explicitly documented response
-model.
+distributions will not be uniform. The current site collects no response
+dataset. Production calibration can use an explicitly documented response
+model or a separately consented research sample; neither exists implicitly
+because the quiz supports browser-local progress.
 
-## Measured results
+## Measured reference-inventory results
 
 The statements in this section are direct outputs or arithmetic summaries of
-the exhaustive analysis.
+the exhaustive analysis of the broader reference inventory. They are not
+production outcome frequencies, completion rates, or user research.
 
 ### Exact duplicate profiles
 
@@ -154,8 +179,35 @@ not source facts.
    behavior, or define and validate secondary weights. Avoid counting a
    cross-loaded response fully in two dimensions because that changes both
    scale reliability and distance geometry.
-7. **Validate with real or modeled response distributions.** Compare the
-   uniform-grid findings with anonymized user profiles, report win rates and
+7. **Validate with consented or modeled response distributions.** Compare the
+   uniform-grid findings with separately consented research profiles, report win rates and
    tie rates by universe, and set an acceptance band before changing source
    baselines. Uniform-grid balance should be a diagnostic, not the sole
    optimization target.
+
+## Evaluating the released experience without tracking
+
+These are proposed research procedures, not collected metrics. No analytics,
+backend, accounts, or tracking dependencies are introduced for them. A small,
+explicitly consented usability study can keep an aggregate worksheet outside
+the application; participants need not supply their individual answers.
+
+| Question | Proposed measure | Important limits |
+| --- | --- | --- |
+| Can people finish? | In observed sessions, completions divided by starts, separately for six-question, direct full, refinement, and Sesame journeys. Record voluntary abandonment and usability blockers separately. | Define a start and completion before observing; report sample size and recruitment method. Do not combine distinct paths into one rate. |
+| Does the reveal feel fitting? | Invite an optional post-result fit rating and brief explanation; compare quick versus refined fit for the same consenting participant. | Subjective enjoyment and fit do not validate personality dimensions. Include neutral/negative feedback and missing responses. |
+| Does sharing lead to participation? | In a consented sender/recipient exercise, count links actually shared, opened by invited recipients, and followed by recipient quiz starts/completions. | Copy-button activation is not a confirmed share or conversion. The live site cannot attribute or calculate this funnel. |
+
+Before interpreting a change, choose comparison paths, observation windows,
+and success criteria; disclose denominators and uncertainty rather than
+inventing targets or claiming improvement. Avoid recording names, full
+response vectors, or detailed profile URLs. Do not treat browser-local saved
+answers as a research dataset. Default character-only links intentionally
+provide no sender identifier or per-person score attribution.
+
+Engineering acceptance is separate from user research: verify six and thirty
+question counts, six-to-thirty answer preservation, deterministic scoring,
+back/resume/reset, all four Sesame outcomes, real-data result rendering,
+character-only share privacy, malformed-link errors, a clean deployed module
+graph, Pages subpaths, and keyboard/mobile operation. Passing those checks
+establishes functional behavior, not measured completion, fit, or conversion.

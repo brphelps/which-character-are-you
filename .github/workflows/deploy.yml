@@ -26,6 +26,9 @@ jobs:
       - name: Validate site
         run: ./scripts/validate-site.sh
 
+      - name: Run unit and deployment tests
+        run: npm test
+
       - name: Build Pages artifact
         run: ./scripts/build-pages.sh "${{ runner.temp }}/pages"
 

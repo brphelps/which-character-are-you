@@ -3,202 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Five friendly questions to discover your Sesame Street neighbor energy. A just-for-fun, fan-made character quiz.">
     <title>Which Sesame Street Character Are You?</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/quiz.css">
+    <link rel="stylesheet" href="styles/results.css">
 </head>
-<body>
-    <div class="container">
-        <div class="quiz-container">
-            <h1>Which Sesame Street Character Are You?</h1>
-            
-            <form id="quiz-form">
-                <div class="question">
-                    <h3>1. How would your friends describe you?</h3>
-                    <div class="options">
-                        <label class="option"><input type="radio" id="q1a" name="q1" value="elmo">Cheerful and energetic</label>
-                        <label class="option"><input type="radio" id="q1b" name="q1" value="cookie">Food-loving and enthusiastic</label>
-                        <label class="option"><input type="radio" id="q1c" name="q1" value="oscar">Grumpy but lovable</label>
-                        <label class="option"><input type="radio" id="q1d" name="q1" value="big-bird">Curious and kind</label>
-                    </div>
-                </div>
+<body class="quiz-page">
+    <main class="quiz-shell" data-sesame-quiz>
+        <a class="quiz-home" href="index.html">All character quizzes</a>
+        <header class="quiz-header">
+            <p class="quiz-eyebrow">A friendly face on the street</p>
+            <h1>Who is your Sesame Street neighbor?</h1>
+            <p class="quiz-intro">Five small everyday choices, four familiar friends. Choose what feels most like you and see whose energy you share.</p>
+            <p class="quiz-framing">Fan-made entertainment, not a validated personality test. This is a simple character-vote quiz, not a six-trait personality profile.</p>
+        </header>
 
-                <div class="question">
-                    <h3>2. What's your favorite activity?</h3>
-                    <div class="options">
-                        <label class="option"><input type="radio" id="q2a" name="q2" required value="elmo">Playing with friends</label>
-                        <label class="option"><input type="radio" id="q2b" name="q2" value="cookie">Eating and cooking</label>
-                        <label class="option"><input type="radio" id="q2c" name="q2" value="oscar">Collecting interesting things</label>
-                        <label class="option"><input type="radio" id="q2d" name="q2" value="big-bird">Learning new things</label>
-                    </div>
+        <section class="quiz-card" aria-labelledby="quiz-title">
+            <div class="quiz-card__topline">
+                <div>
+                    <h2 id="quiz-title">Five friendly questions</h2>
+                    <p class="step-status" data-quiz-step-status></p>
                 </div>
+                <button class="text-button" type="button" data-quiz-reset>Reset all answers</button>
+            </div>
+            <div class="progress-panel">
+                <progress class="progress-bar" data-quiz-progress value="0" max="5" aria-label="Answered questions">0 of 5 answered</progress>
+                <p class="answered-count" data-quiz-answered-count aria-live="polite"></p>
+            </div>
+            <p class="save-status" data-quiz-save-status role="status">Answers stay in this browser. You can come back or reset them at any time.</p>
+            <p class="quiz-loading" data-quiz-loading role="status">Getting your quiz ready...</p>
 
-                <div class="question">
-                    <h3>3. What's your ideal weekend?</h3>
-                    <div class="options">
-                        <label class="option"><input type="radio" id="q3a" name="q3" required value="elmo">Laughing and having fun with everyone</label>
-                        <label class="option"><input type="radio" id="q3b" name="q3" value="cookie">Trying out new recipes</label>
-                        <label class="option"><input type="radio" id="q3c" name="q3" value="oscar">Relaxing alone in my own space</label>
-                        <label class="option"><input type="radio" id="q3d" name="q3" value="big-bird">Exploring new places</label>
-                    </div>
+            <form data-quiz-form novalidate hidden>
+                <div data-quiz-question></div>
+                <p class="quiz-error" data-quiz-error role="alert"></p>
+                <div class="quiz-actions">
+                    <button class="quiz-button" type="button" data-quiz-back>Back</button>
+                    <button class="quiz-button" type="submit" data-quiz-next>Next</button>
                 </div>
-
-                <div class="question">
-                    <h3>4. How do you handle problems?</h3>
-                    <div class="options">
-                        <label class="option"><input type="radio" id="q4a" name="q4" required value="elmo">Stay positive and ask for help</label>
-                        <label class="option"><input type="radio" id="q4b" name="q4" value="cookie">Take a snack break first</label>
-                        <label class="option"><input type="radio" id="q4c" name="q4" value="oscar">Complain but eventually solve it</label>
-                        <label class="option"><input type="radio" id="q4d" name="q4" value="big-bird">Think carefully and ask questions</label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <h3>5. What's most important to you?</h3>
-                    <div class="options">
-                        <label class="option"><input type="radio" id="q5a" name="q5" required value="elmo">Friendship and love</label>
-                        <label class="option"><input type="radio" id="q5b" name="q5" value="cookie">Simple pleasures in life</label>
-                        <label class="option"><input type="radio" id="q5c" name="q5" value="oscar">Being true to yourself</label>
-                        <label class="option"><input type="radio" id="q5d" name="q5" value="big-bird">Knowledge and understanding</label>
-                    </div>
-                </div>
-
-                <button type="submit" class="submit-button">Find Out My Character!</button>
+                <details class="quiz-review">
+                    <summary>Review or change any answer</summary>
+                    <label for="question-picker">Jump to a question</label>
+                    <select id="question-picker" data-quiz-review></select>
+                </details>
             </form>
 
-            <div id="result" class="result">
-                <h2>You are...</h2>
-                <img id="character-image" class="character-image" src="" alt="" />
-                <div class="result-character" id="character-name"></div>
-                <p id="character-description"></p>
-                <a href="index.html" class="back-button">Back to Home</a>
-                <a href="sesame-street.html" class="quiz-button" style="margin-left: 10px;">Take Again</a>
-            </div>
-        </div>
+            <section class="quiz-completion" data-quiz-completion hidden tabindex="-1" aria-label="Your Sesame Street result">
+                <div data-quiz-result></div>
+                <p class="quiz-tie" data-quiz-tie hidden></p>
+                <details class="quiz-review">
+                    <summary>Your answers</summary>
+                    <dl class="response-summary" data-quiz-summary></dl>
+                </details>
+                <div class="quiz-actions">
+                    <button class="quiz-button" type="button" data-quiz-edit>Edit answers</button>
+                    <button class="quiz-button" type="button" data-quiz-restart>Start fresh</button>
+                </div>
+            </section>
+        </section>
 
-        <footer>
-            <p><a href="credits.html">Character image credits and licenses</a></p>
-        </footer>
-    </div>
-
-    <script>
-        const characters = {
-            'elmo': {
-                name: 'Elmo',
-                emoji: '🔴',
-                image: 'images/elmo.jpg',
-                description: 'You are Elmo! You\'re cheerful, enthusiastic, and love spreading joy to everyone around you. Your positive energy is contagious, and you have a special way of making people smile. You see the world with wonder and excitement!'
-            },
-            'cookie': {
-                name: 'Cookie Monster',
-                emoji: '🍪',
-                image: 'images/cookie-monster.jpg',
-                description: 'You are Cookie Monster! You have a passionate love for the good things in life and aren\'t afraid to show your enthusiasm. You\'re fun-loving, impulsive, and always bring energy to any situation. C is for Cookie, and that\'s good enough for you!'
-            },
-            'oscar': {
-                name: 'Oscar the Grouch',
-                emoji: '🗑️',
-                image: 'images/oscar.jpg',
-                description: 'You are Oscar the Grouch! You march to the beat of your own drum and aren\'t afraid to be different. While you might seem grumpy on the outside, you have a heart of gold and are loyal to those you care about. You appreciate the value in things others might overlook!'
-            },
-            'big-bird': {
-                name: 'Big Bird',
-                emoji: '🐦',
-                image: 'images/big-bird.jpg',
-                description: 'You are Big Bird! You\'re curious, kind-hearted, and always eager to learn new things. You have a gentle nature and treat everyone with kindness. Your inquisitive mind and big heart make you a wonderful friend to all!'
-            }
-        };
-
-        document.getElementById('quiz-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const answers = {
-                'elmo': 0,
-                'cookie': 0,
-                'oscar': 0,
-                'big-bird': 0
-            };
-            
-            // Count votes for each character
-            for (let i = 1; i <= 5; i++) {
-                const answer = document.querySelector(`input[name="q${i}"]:checked`);
-                if (answer) {
-                    answers[answer.value]++;
-                }
-            }
-            
-            // Find character with most votes
-            let maxVotes = 0;
-            let resultCharacter = 'elmo';
-            for (const [character, votes] of Object.entries(answers)) {
-                if (votes > maxVotes) {
-                    maxVotes = votes;
-                    resultCharacter = character;
-                }
-            }
-            
-            // Display result
-            const result = characters[resultCharacter];
-            document.getElementById('character-image').src = result.image;
-            document.getElementById('character-image').alt = result.name;
-            document.getElementById('character-name').textContent = result.emoji + ' ' + result.name;
-            document.getElementById('character-description').textContent = result.description;
-            
-            // Hide form and show result
-            document.getElementById('quiz-form').style.display = 'none';
-            document.getElementById('result').classList.add('show');
-        });
-
-        // Add keyboard support for quick answering
-        let currentQuestion = 1;
-        const totalQuestions = 5;
-        
-        // Get question names in order
-        const questionOrder = ['q1', 'q2', 'q3', 'q4', 'q5'];
-        
-        document.addEventListener('keydown', function(e) {
-            // Only handle keys 1-4 when the quiz form is visible
-            if (document.getElementById('quiz-form').style.display === 'none') {
-                return;
-            }
-            
-            // Map keys 1-4 to answer values
-            const keyToValue = {
-                '1': 'elmo',
-                '2': 'cookie',
-                '3': 'oscar',
-                '4': 'big-bird'
-            };
-            
-            if (keyToValue[e.key]) {
-                e.preventDefault();
-                
-                const currentQuestionName = questionOrder[currentQuestion - 1];
-                
-                // Find all radios for current question
-                const radios = document.querySelectorAll(`input[name="${currentQuestionName}"]`);
-                
-                // Select based on key (1=first option, 2=second, etc.)
-                const selectedIndex = parseInt(e.key) - 1;
-                if (radios[selectedIndex]) {
-                    radios[selectedIndex].checked = true;
-                    
-                    // Move to next question if not the last
-                    if (currentQuestion < totalQuestions) {
-                        currentQuestion++;
-                        
-                        // Scroll the next question into view
-                        const nextQuestionName = questionOrder[currentQuestion - 1];
-                        const nextRadio = document.querySelector(`input[name="${nextQuestionName}"]`);
-                        if (nextRadio) {
-                            nextRadio.closest('.question').scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'center'
-                            });
-                        }
-                    }
-                }
-            }
-        });
-    </script>
+        <p class="keyboard-note">Use Tab and arrow keys, or number keys 1-4 while a question or answer is focused. Choose Next when you are ready.</p>
+        <details class="quiz-method">
+            <summary>How this friendly match works</summary>
+            <p>Each answer adds one vote for Elmo, Cookie Monster, Oscar, or Big Bird. The character with the most votes is your match. A tie uses this fixed order: Elmo, Cookie Monster, Oscar, then Big Bird. No personality dimensions or percentages are calculated.</p>
+        </details>
+        <noscript><p class="noscript-message">This quiz needs JavaScript to show questions and match your answers. You can still <a href="index.html">browse the quiz home page</a>.</p></noscript>
+        <footer class="quiz-footer"><a href="credits.html">Character image credits and licenses</a></footer>
+    </main>
+    <script type="module" src="js/sesame-quiz.js"></script>
 </body>
 </html>

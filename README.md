@@ -13,7 +13,8 @@ The production site is plain HTML, CSS, and inline JavaScript:
 - `sesame-street.html` and `muppets.html` contain their questions, character
   metadata, scoring logic, and result rendering.
 - `styles.css` supplies the shared presentation.
-- `images/` contains the SVG character artwork used by quiz results.
+- `images/` contains the locally hosted character portraits used by quiz results.
+- `credits.html` records the source and license for every character image.
 
 There is no package manager, application framework, build-time JavaScript, or
 backend service. Each quiz currently uses direct vote counting: every answer
@@ -69,7 +70,8 @@ No dependency installation is required.
 ```text
 .
 ├── .github/workflows/               # Validation and GitHub Pages automation
-├── images/                          # Public SVG character artwork
+├── images/                          # Public character portraits
+├── credits.html                     # Image sources, attribution, and licenses
 ├── scripts/
 │   ├── build-pages.sh               # Creates the explicit Pages artifact
 │   └── validate-site.sh             # Runs static-site validation
@@ -119,7 +121,8 @@ and deploys it through GitHub Pages.
 
 The workflow does not publish the repository root. README files, design
 documents, scripts, Git metadata, and workflow definitions are excluded from
-the deployed artifact.
+the deployed artifact. The public image credits page is included with the
+deployed quiz pages.
 
 `.github/workflows/validate.yml` runs validation and a packaging smoke test for
 pushes and pull requests.

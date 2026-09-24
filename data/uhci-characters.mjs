@@ -36,7 +36,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "sesame-street",
     sourceOrder: 1,
     scores: { ED: 4, EC: 7, SA: 9, RL: 4, SH: 2, BS: 8 },
-    image: "images/big-bird.svg",
+    image: "images/big-bird.jpg",
     description: "Curious, kind-hearted, gentle, and eager to learn.",
   }),
   character({
@@ -45,7 +45,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "sesame-street",
     sourceOrder: 2,
     scores: { ED: 4, EC: 3, SA: 9, RL: 3, SH: 3, BS: 6 },
-    image: "images/elmo.svg",
+    image: "images/elmo.jpg",
     description: "Cheerful, enthusiastic, positive, and eager to spread joy.",
   }),
   character({
@@ -54,7 +54,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "sesame-street",
     sourceOrder: 3,
     scores: { ED: 3, EC: 2, SA: 8, RL: 4, SH: 3, BS: 4 },
-    image: "images/cookie-monster.svg",
+    image: "images/cookie-monster.jpg",
     description: "Fun-loving, impulsive, energetic, and openly enthusiastic.",
   }),
   character({
@@ -63,7 +63,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "sesame-street",
     sourceOrder: 4,
     scores: { ED: 5, EC: 7, SA: 2, RL: 4, SH: 3, BS: 7 },
-    image: "images/oscar.svg",
+    image: "images/oscar.jpg",
     description: "Independent, unconventional, outwardly grumpy, and loyal to those he values.",
   }),
   character({
@@ -256,7 +256,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 1,
     scores: { ED: 9, EC: 8, SA: 9, RL: 3, SH: 6, BS: 8 },
-    image: "images/kermit.svg",
+    image: "images/kermit.jpg",
     description: "A calm, patient leader who brings people together under pressure.",
   }),
   character({
@@ -265,7 +265,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 2,
     scores: { ED: 9, EC: 2, SA: 5, RL: 4, SH: 7, BS: 4 },
-    image: "images/miss-piggy.svg",
+    image: "images/miss-piggy.jpg",
     description: "Confident, glamorous, dramatic, and determined to pursue what she wants.",
   }),
   character({
@@ -274,7 +274,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 3,
     scores: { ED: 7, EC: 3, SA: 8, RL: 5, SH: 6, BS: 4 },
-    image: "images/fozzie.svg",
+    image: "images/fozzie.jpg",
     description: "Good-natured, optimistic, loyal, and persistent about making others laugh.",
   }),
   character({
@@ -283,7 +283,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 4,
     scores: { ED: 8, EC: 4, SA: 6, RL: 9, SH: 7, BS: 5 },
-    image: "images/gonzo.svg",
+    image: "images/gonzo.jpg",
     description: "Creative, fearless, original, and eager to attempt unusual risks.",
   }),
   character({
@@ -293,7 +293,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     sourceOrder: 5,
     context: "general",
     scores: { ED: 7, EC: 1, SA: 4, RL: 6, SH: 5, BS: 2 },
-    image: "images/animal.svg",
+    image: "images/animal.jpg",
     description: "Wild, energetic, emotionally unrestrained, and drawn to chaos and excitement.",
   }),
   character({
@@ -302,7 +302,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 6,
     scores: { ED: 6, EC: 8, SA: 8, RL: 3, SH: 5, BS: 8 },
-    image: "images/rowlf.svg",
+    image: "images/rowlf.jpg",
     description: "Laid-back, wise, humble, and steady in the company of others.",
   }),
   character({
@@ -311,7 +311,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 7,
     scores: { ED: 8, EC: 9, SA: 8, RL: 2, SH: 4, BS: 9 },
-    image: "images/scooter.svg",
+    image: "images/scooter.jpg",
     description: "Organized, reliable, practical, and focused on helping the team succeed.",
   }),
   character({
@@ -320,7 +320,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 8,
     scores: { ED: 6, EC: 7, SA: 3, RL: 4, SH: 8, BS: 7 },
-    image: "images/statler-waldorf.svg",
+    image: "images/statler-waldorf.jpg",
     description: "Witty, skeptical, outspoken, and known for sharp commentary.",
     exactDuplicateGroup: "muppets-statler-waldorf",
   }),
@@ -330,7 +330,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 9,
     scores: { ED: 6, EC: 7, SA: 3, RL: 4, SH: 8, BS: 7 },
-    image: "images/statler-waldorf.svg",
+    image: "images/statler-waldorf.jpg",
     description: "Witty, skeptical, outspoken, and known for sharp commentary.",
     exactDuplicateGroup: "muppets-statler-waldorf",
   }),
@@ -340,7 +340,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 10,
     scores: { ED: 6, EC: 3, SA: 5, RL: 8, SH: 7, BS: 4 },
-    image: "images/swedish-chef.svg",
+    image: "images/swedish-chef.jpg",
     description: "Creative, enthusiastic, unpredictable, and guided by an unconventional logic.",
   }),
   character({
@@ -349,7 +349,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 11,
     scores: { ED: 7, EC: 9, SA: 6, RL: 3, SH: 4, BS: 8 },
-    image: "images/bunsen.svg",
+    image: "images/bunsen.jpg",
     description: "Intelligent, logical, experimental, and highly absorbed in scientific work.",
   }),
   character({
@@ -358,7 +358,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 12,
     scores: { ED: 4, EC: 2, SA: 7, RL: 4, SH: 4, BS: 3 },
-    image: "images/beaker.svg",
+    image: "images/beaker.jpg",
     description: "Nervous, cautious, loyal, and persistent in overwhelming situations.",
   }),
   character({
@@ -367,7 +367,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 13,
     scores: { ED: 8, EC: 9, SA: 4, RL: 2, SH: 5, BS: 9 },
-    image: "images/sam-eagle.svg",
+    image: "images/sam-eagle.jpg",
     description: "Dignified, principled, orderly, and strongly committed to tradition.",
   }),
   character({
@@ -376,7 +376,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 14,
     scores: { ED: 7, EC: 4, SA: 5, RL: 5, SH: 7, BS: 5 },
-    image: "images/rizzo.svg",
+    image: "images/rizzo.jpg",
     description: "Street-smart, witty, self-interested, and skilled at adapting to opportunities.",
   }),
   character({
@@ -385,7 +385,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 15,
     scores: { ED: 8, EC: 3, SA: 4, RL: 6, SH: 7, BS: 4 },
-    image: "images/pepe.svg",
+    image: "images/pepe.jpg",
     description: "Confident, charming, dramatic, and comfortable seeking the spotlight.",
   }),
   character({
@@ -445,7 +445,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     context: "Electric Mayhem",
     variantOf: "muppets-animal",
     scores: { ED: 8, EC: 1, SA: 5, RL: 6, SH: 6, BS: 2 },
-    image: "images/animal.svg",
+    image: "images/animal.jpg",
     description: "Wild, energetic, emotionally unrestrained, and drawn to chaos and excitement.",
   }),
   character({
@@ -475,7 +475,7 @@ export const UHCI_CHARACTERS = Object.freeze([
     universe: "muppets",
     sourceOrder: 27,
     scores: { ED: 6, EC: 7, SA: 9, RL: 3, SH: 4, BS: 8 },
-    image: "images/walter.svg",
+    image: "images/walter.jpg",
     description: "Sincere, enthusiastic, optimistic, and strongly motivated by friendship.",
   }),
   character({

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { afterEach, beforeEach, test } from "node:test";
 import { QuizController, restoreQuizState } from "../js/quiz-controller.js";
 import { MUPPET_FULL_QUESTIONS, MUPPET_QUICK_QUESTIONS, FREQUENCY_OPTIONS } from "../data/quiz-content.mjs";
+import { MUPPET_STORAGE_KEY } from "../js/muppets-quiz.js";
 
 // Small DOM boundary doubles; browser coverage exercises the real radio/focus
 // behavior. These keep persistence and transition regression tests dependency-free.
@@ -169,6 +170,48 @@ test("full/quick toggles and reloads retain the entire bank and restore complete
     assert.equal(full.currentIndex, 9);
     assert.deepEqual(full.answers, answers);
 });
+
+for (const journeyId of ["quick", "full"]) {
+    test(`revised ${journeyId} starts fresh from old-wording storage and resumes only new answers`, () => {
+        const oldKey = "which-character-are-you:muppets:frequency-v1";
+        const oldQuestions = journeyId === "quick"
+            ? MUPPET_FULL_QUESTIONS.filter((question) => [1, 6, 11, 16, 21, 26].includes(question.number))
+            : MUPPET_FULL_QUESTIONS;
+        const oldState = JSON.stringify({
+            version: 2,
+            journeyId,
+            currentQuestionId: oldQuestions.at(-1).id,
+            completed: true,
+            answers: Object.fromEntries(oldQuestions.map((question) => [question.id, 10]))
+        });
+        store.set(oldKey, oldState);
+        let completions = 0;
+        const options = {
+            questions: journeyId === "quick" ? MUPPET_QUICK_QUESTIONS : MUPPET_FULL_QUESTIONS,
+            journeyId,
+            storageKey: MUPPET_STORAGE_KEY,
+            onComplete() { completions += 1; }
+        };
+        const controller = makeController(options);
+        assert.deepEqual(controller.answers, {});
+        assert.equal(controller.currentIndex, 0);
+        assert.equal(controller.completed, false);
+        assert.equal(completions, 0);
+        choose(controller, 3);
+        submit(controller);
+        controller.destroy();
+
+        const restored = makeController(options);
+        assert.deepEqual(restored.answers, { "uhci-q01": 7.75 });
+        assert.equal(restored.currentIndex, 1);
+        assert.equal(restored.completed, false);
+        assert.equal(store.get(oldKey), oldState);
+        restored.reset();
+        assert.equal(store.has(MUPPET_STORAGE_KEY), false);
+        assert.equal(store.get(oldKey), oldState);
+        restored.destroy();
+    });
+}
 
 test("restoration strictly rejects old values and invalid answers while keeping valid ones in inactive mode", () => {
     const answers = {

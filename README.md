@@ -57,12 +57,25 @@ validity. Sesame uses direct character votes, not a fabricated UHCI profile.
 See [scoring calibration](docs/scoring-calibration.md) for reference-model
 limitations and proposed evaluation methods.
 
+The live questions in `data/quiz-content.mjs` retain five items per trait but
+cover distinct everyday behaviors: independent initiative, emotional recovery,
+cooperation without self-sacrifice, imaginative thinking, deliberate performance,
+and consistency across situations and time. The preview uses Q1, Q7, Q11, Q19,
+Q22, and Q26 from that revised bank. The original questionnaire remains archival;
+its secondary trait associations are not claims about the revised wording.
+This is a content revision, not an empirically validated improvement.
+
 ## Privacy
 
 Answers and resumable progress stay in browser storage on the current device;
 they are not submitted to a quiz server. Reset clears the corresponding saved
 quiz progress. Browser storage can be unavailable or cleared, so a saved
 session is not a backup or cross-device account.
+
+The revised Muppet question set uses the `frequency-v2` storage key. Answers
+saved under `frequency-v1` are left untouched but are not restored into different
+questions. New preview and full-profile progress still share one answer bank.
+Reset clears the current question set's progress, not older-version storage.
 
 The default share URL contains only a production character ID. It does not
 contain individual answers, dimension scores, or a completion history.

@@ -21,8 +21,9 @@ function answersFor(questions, value = 5.5) {
     return Object.fromEntries(questions.map((question) => [question.id, value]));
 }
 
-test("warm questions retain every archival id, primary dimension, reversal, and source reference", () => {
+test("revised questions retain every archival id, primary dimension, reversal, and source reference", () => {
     assert.equal(MUPPET_QUESTIONS.length, 30);
+    assert.equal(new Set(MUPPET_QUESTIONS.map((question) => question.prompt)).size, 30);
     for (const [index, question] of MUPPET_QUESTIONS.entries()) {
         const source = UHCI_QUESTIONS[index];
         assert.equal(question.id, source.id);
@@ -41,7 +42,7 @@ test("warm questions retain every archival id, primary dimension, reversal, and 
 
 test("quick has one primary item per dimension and full retains its six followed by exactly 24", () => {
     assert.deepEqual(MUPPET_QUICK_QUESTIONS.map((question) => question.dimension), UHCI_DIMENSIONS);
-    assert.deepEqual(MUPPET_QUICK_QUESTIONS.map((question) => question.number), [1, 6, 11, 16, 21, 26]);
+    assert.deepEqual(MUPPET_QUICK_QUESTIONS.map((question) => question.number), [1, 7, 11, 19, 22, 26]);
     assert.deepEqual(MUPPET_FULL_QUESTIONS.slice(0, 6), MUPPET_QUICK_QUESTIONS);
     assert.equal(MUPPET_FULL_QUESTIONS.slice(6).length, 24);
     assert.equal(new Set(MUPPET_FULL_QUESTIONS.map((question) => question.id)).size, 30);
@@ -53,28 +54,56 @@ test("quick has one primary item per dimension and full retains its six followed
     assert.throws(() => getMuppetQuestions("unknown"), /Unknown/);
 });
 
+test("preview prompts directly sample initiative, composure, inclusion, playful reasoning, performance, and consistency", () => {
+    assert.deepEqual(MUPPET_QUICK_QUESTIONS.map((question) => question.prompt), [
+        "When friends are waiting for something to happen, I get the first idea rolling.",
+        "When a get-together hits a snag, I can take a breath and stay composed.",
+        "When choosing what to do together, I look for an option that works for everyone, including me.",
+        "When talking about a big idea, a silly example helps me see something true.",
+        "When telling a story, I add a little extra expression for the audience.",
+        "Whether I am with old friends or new people, I feel like much the same person."
+    ]);
+    assert.ok(MUPPET_QUICK_QUESTIONS.every((question) => !question.reverseScored));
+});
+
 test("five frequency choices are exactly spaced and reversed by 11-x, including unchanged midpoint", () => {
     assert.deepEqual(FREQUENCY_OPTIONS.map((option) => option.label),
         ["Almost never", "Rarely", "Sometimes", "Often", "Almost always"]);
     assert.deepEqual(FREQUENCY_OPTIONS.map((option) => option.value), [1, 3.25, 5.5, 7.75, 10]);
     assert.ok(Object.isFrozen(FREQUENCY_OPTIONS));
-    for (const { value } of FREQUENCY_OPTIONS) {
+    for (const [index, { value }] of FREQUENCY_OPTIONS.entries()) {
         const scores = scoreResponses(MUPPET_QUICK_QUESTIONS, answersFor(MUPPET_QUICK_QUESTIONS, value));
-        assert.deepEqual(scores, { ED: value, EC: 11 - value, SA: value, RL: 11 - value, SH: value, BS: value });
+        assert.deepEqual(scores, { ED: value, EC: value, SA: value, RL: value, SH: value, BS: value });
+        assert.equal(11 - value, FREQUENCY_OPTIONS.at(-1 - index).value);
     }
     assert.deepEqual(scoreResponses(MUPPET_FULL_QUESTIONS, answersFor(MUPPET_FULL_QUESTIONS)),
         { ED: 5.5, EC: 5.5, SA: 5.5, RL: 5.5, SH: 5.5, BS: 5.5 });
 });
 
-test("all 30 warm questions score only their primary dimension with the original reversal direction", () => {
+test("every choice on all 30 revised items scores only its primary dimension with the original reversal direction", () => {
     for (const question of MUPPET_FULL_QUESTIONS) {
-        const answers = answersFor(MUPPET_FULL_QUESTIONS);
-        answers[question.id] = 10;
-        const scores = scoreResponses(MUPPET_FULL_QUESTIONS, answers);
-        for (const dimension of UHCI_DIMENSIONS) {
-            assert.equal(scores[dimension],
-                dimension === question.dimension ? 5.5 + (question.reverseScored ? -0.9 : 0.9) : 5.5,
-                `${question.id} changed ${dimension} unexpectedly`);
+        for (const { value } of FREQUENCY_OPTIONS) {
+            const answers = answersFor(MUPPET_FULL_QUESTIONS);
+            answers[question.id] = value;
+            const scores = scoreResponses(MUPPET_FULL_QUESTIONS, answers);
+            const scoredValue = question.reverseScored ? 11 - value : value;
+            for (const dimension of UHCI_DIMENSIONS) {
+                assert.equal(scores[dimension],
+                    dimension === question.dimension ? (4 * 5.5 + scoredValue) / 5 : 5.5,
+                    `${question.id} with ${value} changed ${dimension} unexpectedly`);
+            }
+        }
+    }
+});
+
+test("one choice step has equal influence across traits: 2.25 in preview and 0.45 in full", () => {
+    for (const [questions, expectedChange] of [[MUPPET_QUICK_QUESTIONS, 2.25], [MUPPET_FULL_QUESTIONS, 0.45]]) {
+        for (const question of questions) {
+            const answers = answersFor(questions);
+            answers[question.id] = 7.75;
+            const scores = scoreResponses(questions, answers);
+            const change = scores[question.dimension] - 5.5;
+            assert.ok(Math.abs(change - (question.reverseScored ? -expectedChange : expectedChange)) < 1e-10);
         }
     }
 });
@@ -141,7 +170,7 @@ test("default preview, explicit full route, and versioned per-universe storage s
     assert.equal(getMuppetMode("?mode=full"), "full");
     assert.equal(getMuppetMode("?mode=quick"), "quick");
     assert.equal(getMuppetMode("?mode=unknown"), "quick");
-    assert.match(MUPPET_STORAGE_KEY, /frequency-v1$/);
+    assert.match(MUPPET_STORAGE_KEY, /frequency-v2$/);
     assert.notEqual(MUPPET_STORAGE_KEY, SESAME_STORAGE_KEY);
 });
 

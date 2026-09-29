@@ -23,6 +23,52 @@ ascending production character ID.
 Similarity is `100 * (1 - distance / (9 * sqrt(6)))`; it is not confidence,
 probability, or an empirical measure of personal fit.
 
+## Live question coverage
+
+`data/quiz-content.mjs` contains the revised player-facing questions.
+`muppet-questions.md` and `data/uhci-questions.mjs` retain the original wording
+as an archive. Live items keep their archival IDs, primary dimensions, and
+reversal directions; secondary associations describe the source questions,
+not additional coverage or validated relationships in the revised set.
+
+Each trait still has five equally weighted items. The changes address content
+coverage, not character-baseline geometry or demonstrated scoring accuracy.
+Question numbers in this table are stable source numbers, not presentation
+positions: full mode starts with the preview's six questions.
+
+| Trait | Facets covered by its five live items | Preview item |
+| --- | --- | --- |
+| Event Drive | Q1 social initiation; Q2 next-step planning; Q3 steering disagreement; Q4 independent project initiation; Q5 taking action to improve something. | Q1: initiating an idea |
+| Emotional Containment | Q6 recovery after a setback (reversed); Q7 composure; Q8 emotion-led judgment (reversed); Q9 measured responses in conflict; Q10 acting on an urge despite an intention to wait (reversed). | Q7: staying composed |
+| Social Aim | Q11 inclusive choices, including one's own needs; Q12 sharing credit; Q13 mutual help; Q14 prioritizing oneself over the group (reversed); Q15 welcome, voluntary support. | Q11: shared wellbeing |
+| Reality Lens | Q16 preference for realistic possibilities (reversed); Q17 enjoyment of absurdity; Q18 preference for literal explanations (reversed); Q19 insight through silly examples; Q20 generating impossible combinations. | Q19: playful reasoning |
+| Show-Awareness | Q21 deliberate narrative reveals; Q22 expressive storytelling; Q23 immersion rather than performance (reversed); Q24 intentional comic personas; Q25 stepping outside a moment for an aside. | Q22: deliberate performance |
+| Behavioral Stability | Q26 consistency across familiar and unfamiliar people; Q27 predictability; Q28 changing goals in otherwise stable circumstances (reversed); Q29 changing habits in otherwise stable circumstances (reversed); Q30 stable priorities despite changing circumstances. | Q26: cross-context consistency |
+
+The preview now uses Q1/Q7/Q11/Q19/Q22/Q26, rather than
+Q1/Q6/Q11/Q16/Q21/Q26. It no longer relies on visible emotion, preference for
+clear game rules, or self-consciousness as its sole indicators of regulation,
+absurd thinking, or performance. Each preview item remains a narrow sample of
+its trait, and all six are forward-scored. Full mode retains nine reversed
+items; equal reversal counts are not a substitute for meaningful coverage.
+A one-choice change still moves a preview dimension by 2.25 points and a full
+dimension by 0.45 points.
+
+Remaining limitations include self-report and socially desirable responding,
+overlap between neighboring traits, and the absence of reliability or
+factor-analysis evidence. Stable habits can also reflect conscientiousness,
+and storytelling preferences do not capture every form of performance.
+The unchanged fictional character baselines have not been recalibrated against
+responses to these revised questions. A consented study would be needed to
+evaluate interpretation, quick/full agreement, and empirical trait separation.
+
+Saved progress uses `which-character-are-you:muppets:frequency-v2`.
+The previous `frequency-v1` answers are not read, migrated, or deleted:
+identical IDs must not attach answers to revised wording. New quick/full
+progress retains exact values within the revised bank; resetting clears only
+that version's progress. Existing shared results contain scores or character
+IDs, not questionnaire answers, and remain readable.
+
 ## Scope and data exports
 
 The normalized data preserves the 30 questions from `muppet-questions.md` and

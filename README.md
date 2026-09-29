@@ -106,6 +106,12 @@ npm test
 ./scripts/build-pages.sh /tmp/which-character-pages
 ```
 
+`tests/character-answer-sets.test.js` provides fixed, selectable answer sets for
+all 15 Muppet results in both quick and full mode, plus all four Sesame Street
+results. The Muppet fixtures check expected dimension scores and an untied
+closest match; their preview answers carry into the full set unchanged.
+These are scoring regression examples, not evidence of personality validity.
+
 The validator checks HTML references, nested CSS assets, `.js`/`.mjs` syntax,
 literal module imports/re-exports, and catalog image paths. Root-relative
 references fail because they break GitHub Pages project subpaths. Literal

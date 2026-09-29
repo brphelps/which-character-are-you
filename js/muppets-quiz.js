@@ -2,7 +2,7 @@ import { createQuizController } from "./quiz-controller.js";
 import { scoreResponses } from "./quiz-engine.js";
 import { getMuppetQuestions, MUPPET_QUESTIONS } from "../data/quiz-content.mjs";
 
-export const MUPPET_STORAGE_KEY = "which-character-are-you:muppets:frequency-v1";
+export const MUPPET_STORAGE_KEY = "which-character-are-you:muppets:frequency-v2";
 
 export function getMuppetMode(search) {
     return new URLSearchParams(search).get("mode") === "full" ? "full" : "quick";

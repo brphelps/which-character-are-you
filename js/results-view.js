@@ -5,10 +5,10 @@ import { createCharacterShareUrl, downloadResultCard } from "./result-sharing.js
 const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 const DESCRIPTIONS = {
     ED: "How readily you initiate and steer events",
-    EC: "How tightly you contain emotional reactions",
+    EC: "How you regulate emotions and impulses",
     SA: "How strongly you prioritize shared wellbeing",
     RL: "How readily you embrace absurd or playful logic",
-    SH: "How aware you are of presentation and audience",
+    SH: "How deliberately you perform or step outside the scene",
     BS: "How consistent your behavior is across situations"
 };
 

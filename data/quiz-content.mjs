@@ -10,49 +10,51 @@ export const FREQUENCY_OPTIONS = Object.freeze([
     Object.freeze({ value: 10, label: "Almost always" })
 ]);
 
-const warmPrompts = [
+// Revised live wording keeps archival IDs and scoring directions. The source
+// questions and their secondary associations remain provenance, not live coverage.
+const muppetPrompts = [
     "When friends are waiting for something to happen, I get the first idea rolling.",
     "When our plans are a little fuzzy, I help the group work out a next step.",
     "When the group is pulling in different directions, I am happy to steer us toward a plan.",
-    "On a quiet afternoon, I feel the urge to get something going.",
-    "When we plan a get-together, I would rather help shape it than wait to see what happens.",
-    "When a plan changes, my face gives away how I feel.",
+    "When I have an idea for a project of my own, I take a first step without waiting for encouragement.",
+    "When something I use could work better, I take the lead in trying to improve it.",
+    "When a small setback upsets me, I have trouble settling down afterward.",
     "When a get-together hits a snag, I can take a breath and stay composed.",
     "In an emotional moment, my feelings take the lead before I have weighed things up.",
-    "When things get hectic, friends look to me for a calm presence.",
-    "When an idea excites me, I jump in before thinking through the details.",
-    "When choosing what to do together, I put the group's happiness ahead of my first choice.",
-    "When a friend has a big moment, helping them shine matters more to me than getting the credit.",
-    "When a shared project takes longer, I still enjoy working on it together.",
-    "When the group's usual way does not suit me, I am comfortable doing my own thing.",
-    "When someone in the group feels out of sorts, I feel it is partly on me to help.",
-    "When someone explains a game, I prefer clear rules to a playful 'we will see!'",
+    "When a disagreement gets heated, I keep my response measured.",
+    "When an urge strikes, I act on it even if I had planned to hold off.",
+    "When choosing what to do together, I look for an option that works for everyone, including me.",
+    "When a shared effort goes well, I make sure others get credit for their part.",
+    "When a shared project gets tricky, I look for ways we can help each other.",
+    "When making plans with others, my own priorities guide my choice more than the group's preferences.",
+    "When someone is having a rough day, I offer help if they would welcome it.",
+    "When we make up a story or a game, I steer it toward things that could really happen.",
     "When a story gets delightfully ridiculous, I enjoy going along with it.",
-    "When someone tells me something, I take their words at face value.",
+    "When an idea is explained through a fanciful comparison, I look for a plain, literal explanation instead.",
     "When talking about a big idea, a silly example helps me see something true.",
-    "When a story bends its own logic, I am happy to enjoy the ride.",
-    "When I am with a group, I notice how I am coming across, even in a serious moment.",
+    "When imagining possibilities, I come up with combinations that would be impossible in real life.",
+    "When sharing an experience, I deliberately build up to a reveal for the people listening.",
     "When telling a story, I add a little extra expression for the audience.",
-    "When something is happening around me, I am caught up in the moment rather than watching myself in it.",
-    "When friends expect me to be the planner, joker, or listener, I knowingly step into that role.",
+    "When something funny happens around me, I stay in the moment rather than turn it into a performance.",
+    "When joking with friends, I deliberately slip into an exaggerated character for comic effect.",
     "When everyone is swept up in a moment, I am happy to step outside it for a playful aside.",
     "Whether I am with old friends or new people, I feel like much the same person.",
     "When friends make plans with me, they have a good idea of what to expect.",
-    "When my mood changes, the same little situation can get a very different reaction from me.",
-    "On a stressful day, I act quite differently from my usual self.",
-    "When the pressure is on, I stick to my usual values and ways of doing things."
+    "Even when my circumstances stay the same, I switch which personal goals I want to pursue.",
+    "My usual habits change a lot from one week to the next, even when daily life stays much the same.",
+    "When a situation changes, the same core priorities still guide my choices."
 ];
 
 export const MUPPET_QUESTIONS = Object.freeze(UHCI_QUESTIONS.map((source, index) => Object.freeze({
     ...source,
-    prompt: warmPrompts[index],
+    prompt: muppetPrompts[index],
     dimension: source.dimensions[0],
     source: Object.freeze({ path: UHCI_QUESTION_SOURCE, question: source }),
     options: FREQUENCY_OPTIONS
 })));
 
 export const MUPPET_QUICK_QUESTIONS = Object.freeze(
-    MUPPET_QUESTIONS.filter((question) => [1, 6, 11, 16, 21, 26].includes(question.number))
+    MUPPET_QUESTIONS.filter((question) => [1, 7, 11, 19, 22, 26].includes(question.number))
 );
 
 // Full mode starts with the same six opening questions, then the remaining 24.
